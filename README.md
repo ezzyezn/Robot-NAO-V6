@@ -19,7 +19,7 @@ I checked everything in CMD. I used `python --version` and `pip --version` to ch
 I created a working folder where I will test Ollama using Python. After creating the folder, I opened it in Visual Studio Code.
 
 ### 6.Install LLM
-Download the first local LLM using the command ollama pull llama3.2:3b. After the download is complete, run it using ollama run llama3.2:3b. The Llama model is now running locally, and we can chat with it. Everything works well.
+Download the first local LLM using the command `ollama pull llama3.2:3b`. After the download is complete, run it using `ollama run llama3.2:3b`. The Llama model is now running locally, and we can chat with it. Everything works well.
 
 ### 7.Creating a Python file
 Create a Python file `test_ollama.py` to work with Ollama.
