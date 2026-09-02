@@ -1,15 +1,18 @@
 # Robot-NAO-V6
 A repository for documenting my internship work with the NAO V6 robot, including progress reports, experiments, and project materials
 
-## 1.Installing and setting up all components
+# Project goal: 
+Build a locally running AI assistant for the NAO V6 robot that can understand speech, answer domain-specific questions using verified information, and control selected robot actions.
+
+# 1.Installing and setting up all components
 
 ### 1.Install Python
-First, you need to install Python. Version 3.12 is recommended, but I installed Python 3.13 from the official Microsoft Store.
+First, you need to install Python.Version Python 3.13 from the official Microsoft Store.
 
 ### 2.Install VS Code
 After that, I installed Visual Studio Code from the official website. Then, I opened VS Code and installed the Python extension by Microsoft.
 
-### 3.Install Ollahama
+### 3.Install Ollama
 Now, I need to install a local AI tool on my computer. For this, I downloaded Ollama from the official website using the Windows installer.
 
 ### 4.Checking the installed components
@@ -27,7 +30,11 @@ Create a Python file `test_ollama.py` to work with Ollama. [Commit](https://gith
 ### 8.Install Ollama package
 We also install the official Ollama package for Python. To do this, run `pip install ollama` in the Visual Studio Code terminal.
 
-## 2. Testing LLM
+# 2. Testing LLM
 
 ### 1.First test
 The first attempt to communicate with Ollama using Python code was successful. [Commit](https://github.com/ezzyezn/Robot-NAO-V6/commit/25364c9f4a63638928a220a20e6facbad7fdb32a)
+
+### 2.Second Test
+In the next test, we enter a question in the terminal after starting the program. The LLM now follows the rules specified in the `content` field for the `system` role and answers only questions related to the given topic. The test was successful. [Commit 1](https://github.com/ezzyezn/Robot-NAO-V6/commit/a51f3b0081d020857cd4874ccb209efbb4cef4de), [Commit 2](https://github.com/ezzyezn/Robot-NAO-V6/commit/d994bb96011788e39cd32f6c0abe9de221d7645f)
+*The model does not have the required information yet, so it cannot correctly answer the questions I need. In some cases, the model may make up answers. This is expected at this stage and will be fixed later.*
