@@ -22,7 +22,7 @@ I created a working folder where I will test Ollama using Python. After creating
 Download the first local LLM using the command `ollama pull llama3.2:3b`. After the download is complete, run it using `ollama run llama3.2:3b`. The Llama model is now running locally, and we can chat with it. Everything works well.
 
 ### 7.Creating a Python file
-Create a Python file `test_ollama.py` to work with Ollama.
+Create a Python file `test_ollama.py` to work with Ollama. [Commit](https://github.com/ezzyezn/Robot-NAO-V6/commit/44fa659fd820090ff111a0ae712b9d03fab528dd)
 
 ### 8.Install Ollama package
 We also install the official Ollama package for Python. To do this, run `pip install ollama` in the Visual Studio Code terminal.
