@@ -2,6 +2,12 @@ import ollama ##import the ollama module
 
 content = input("Enter your message: ") ## prompt the user to enter a message
 
+school_info = """
+Technikum Teb Edukacja znajduje się w Gdańsku,
+Technikum Teb Edukacja jest szkołą niepubliczną,
+Dyrektorem szkoły jest Iwona Białopiotrowicz,
+""" ## information about the school that will be provided to the model
+
 response = ollama.chat( ## call the chat function from the ollama module
     model="llama3.2:3b", ## name of the model we will use
     messages=[
@@ -23,7 +29,11 @@ response = ollama.chat( ## call the chat function from the ollama module
             },
         
         {"role": "user", ## role of the message sender, this role a standard role for user messages
-         "content": content ## The message we send to the model
+         "content": f"""
+         Informacje o szkole: {school_info }
+         
+         Pytanie użytkownika: {content}
+         """## The content of the message, which includes the school information and the user's question
             }, 
     ])
 print(response['message']['content']) ## print the response from the model
