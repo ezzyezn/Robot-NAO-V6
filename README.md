@@ -3,7 +3,7 @@ A repository for documenting my internship work with the NAO V6 robot, including
 
 ## 1.Installing and setting up all components
 
-### 1.Install Python###
+### 1.Install Python
 First, you need to install Python. Version 3.12 is recommended, but I installed Python 3.13 from the official Microsoft Store.
 
 ### 2.Install VS Code
