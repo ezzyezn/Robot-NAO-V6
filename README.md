@@ -26,3 +26,8 @@ Create a Python file `test_ollama.py` to work with Ollama. [Commit](https://gith
 
 ### 8.Install Ollama package
 We also install the official Ollama package for Python. To do this, run `pip install ollama` in the Visual Studio Code terminal.
+
+## 2. Testing LLM
+
+### 1.First test
+The first attempt to communicate with Ollama using Python code was successful. [Commit](https://github.com/ezzyezn/Robot-NAO-V6/commit/25364c9f4a63638928a220a20e6facbad7fdb32a)
