@@ -23,3 +23,6 @@ Download the first local LLM using the command `ollama pull llama3.2:3b`. After 
 
 ### 7.Creating a Python file
 Create a Python file `test_ollama.py` to work with Ollama.
+
+### 8.Install Ollama package
+We also install the official Ollama package for Python. To do this, run `pip install ollama` in the Visual Studio Code terminal.
