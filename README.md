@@ -25,16 +25,19 @@ I created a working folder where I will test Ollama using Python. After creating
 Download the first local LLM using the command `ollama pull llama3.2:3b`. After the download is complete, run it using `ollama run llama3.2:3b`. The Llama model is now running locally, and we can chat with it. Everything works well.
 
 ### 7.Creating a Python file
-Create a Python file `test_ollama.py` to work with Ollama. [Commit](https://github.com/ezzyezn/Robot-NAO-V6/commit/44fa659fd820090ff111a0ae712b9d03fab528dd)
+Create a Python file `test_ollama.py` to work with Ollama. [Commit 44fa659](https://github.com/ezzyezn/Robot-NAO-V6/commit/44fa659fd820090ff111a0ae712b9d03fab528dd)
 
 ### 8.Install Ollama package
 We also install the official Ollama package for Python. To do this, run `pip install ollama` in the Visual Studio Code terminal.
 
-# 2. Testing LLM
+# 2.Testing LLM
 
 ### 1.First test
-The first attempt to communicate with Ollama using Python code was successful. [Commit](https://github.com/ezzyezn/Robot-NAO-V6/commit/25364c9f4a63638928a220a20e6facbad7fdb32a)
+The first attempt to communicate with Ollama using Python code was successful. [Commit 25364c9](https://github.com/ezzyezn/Robot-NAO-V6/commit/25364c9f4a63638928a220a20e6facbad7fdb32a)
 
 ### 2.Second Test
-In the next test, we enter a question in the terminal after starting the program. The LLM now follows the rules specified in the `content` field for the `system` role and answers only questions related to the given topic. The test was successful. [Commit 1](https://github.com/ezzyezn/Robot-NAO-V6/commit/a51f3b0081d020857cd4874ccb209efbb4cef4de), [Commit 2](https://github.com/ezzyezn/Robot-NAO-V6/commit/d994bb96011788e39cd32f6c0abe9de221d7645f)
+In the next test, we enter a question in the terminal after starting the program. The LLM now follows the rules specified in the `content` field for the `system` role and answers only questions related to the given topic. The test was successful. [Commit a51f3b0](https://github.com/ezzyezn/Robot-NAO-V6/commit/a51f3b0081d020857cd4874ccb209efbb4cef4de), [Commit d994bb9](https://github.com/ezzyezn/Robot-NAO-V6/commit/d994bb96011788e39cd32f6c0abe9de221d7645f)
 *The model does not have the required information yet, so it cannot correctly answer the questions I need. In some cases, the model may make up answers. This is expected at this stage and will be fixed later.*
+
+### 3.Third test
+In this test, I added information for the LLM to use. The test was successful. [Commit 86ca1c6](https://github.com/ezzyezn/Robot-NAO-V6/commit/86ca1c6426b24ba4dcbec7402b22f43ece93bc59)
