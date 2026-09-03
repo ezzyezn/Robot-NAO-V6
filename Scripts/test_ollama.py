@@ -2,12 +2,9 @@ import ollama ##import the ollama module
 
 content = input("Enter your message: ") ## prompt the user to enter a message
 
-school_info = """
-Technikum Teb Edukacja znajduje się w Gdańsku,
-Technikum Teb Edukacja jest szkołą niepubliczną,
-Dyrektorem szkoły jest Iwona Białopiotrowicz,
-""" ## information about the school that will be provided to the model
-
+with open("Scripts/school_info.txt", "r", encoding="utf-8") as file: ## school infromation is read from a text file
+    school_info = file.read() ## read the content of the file and store it in a variable
+    
 user_message = f"""
 
 Informacje o szkole: {school_info}
