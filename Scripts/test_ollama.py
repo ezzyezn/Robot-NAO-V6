@@ -7,8 +7,12 @@ with open("Scripts/school_info.txt", "r", encoding="utf-8") as file: ## school i
     
 lines = school_info.splitlines() ## split the content of the file into lines
 
-for line in lines: ## iterate through each line of the school information
-    print(line) ## print each line of the school information
+question_word = content.lower().split() ## split the user's question into words and convert them to lowercase
+
+for line in lines:
+    for word in question_word:
+        if word in line.lower(): ## check if any word from the user's question is present in the school information
+           print(word, "->", line) ## if a match is found, add the line to the found_info variable
 
 user_message = f"""
 
