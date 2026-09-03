@@ -41,3 +41,6 @@ In the next test, we enter a question in the terminal after starting the program
 
 ### 3.Third test
 In this test, I added information for the LLM to use. The test was successful. [Commit 86ca1c6](https://github.com/ezzyezn/Robot-NAO-V6/commit/86ca1c6426b24ba4dcbec7402b22f43ece93bc59)
+
+### 4.Fourth test
+I moved the information from the `school_info` variable to a separate `TXT` file. I also changed the format for sending requests to the LLM chat to make the code cleaner and easier to understand. The test was successful. [Commit 98abfab](https://github.com/ezzyezn/Robot-NAO-V6/commit/98abfaba2b6162e671f79733bbe96459beb0bd46), [Commit 8b12979](https://github.com/ezzyezn/Robot-NAO-V6/commit/8b1297968d9f93350e490b12e5602271b968295a)
