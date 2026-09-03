@@ -9,14 +9,17 @@ lines = school_info.splitlines() ## split the content of the file into lines
 
 question_word = content.lower().split() ## split the user's question into words and convert them to lowercase
 
+found_info = "" ## variable to store the school information that matches the user's question
+
 for line in lines:
     for word in question_word:
-        if word in line.lower(): ## check if any word from the user's question is present in the school information
+        if word in line.lower():## check if any word from the user's question is present in the school information
+           found_info = line ## if a match is found, add the line to the found_info variable
            print(word, "->", line) ## if a match is found, add the line to the found_info variable
 
 user_message = f"""
 
-Informacje o szkole: {school_info}
+Informacje o szkole: {found_info}
 
 Pytanie użytkownika: {content}
 
