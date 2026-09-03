@@ -8,6 +8,14 @@ Technikum Teb Edukacja jest szkołą niepubliczną,
 Dyrektorem szkoły jest Iwona Białopiotrowicz,
 """ ## information about the school that will be provided to the model
 
+user_message = f"""
+
+Informacje o szkole: {school_info}
+
+Pytanie użytkownika: {content}
+
+""" ##question to be sent to the model, which includes the school information and the user's question
+
 response = ollama.chat( ## call the chat function from the ollama module
     model="llama3.2:3b", ## name of the model we will use
     messages=[
@@ -29,11 +37,7 @@ response = ollama.chat( ## call the chat function from the ollama module
             },
         
         {"role": "user", ## role of the message sender, this role a standard role for user messages
-         "content": f"""
-         Informacje o szkole: {school_info }
-         
-         Pytanie użytkownika: {content}
-         """## The content of the message, which includes the school information and the user's question
+         "content": user_message ## content of the message, which is the user's question and the school information
             }, 
     ])
 print(response['message']['content']) ## print the response from the model
