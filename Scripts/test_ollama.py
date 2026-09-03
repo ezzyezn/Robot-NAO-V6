@@ -5,6 +5,11 @@ content = input("Enter your message: ") ## prompt the user to enter a message
 with open("Scripts/school_info.txt", "r", encoding="utf-8") as file: ## school infromation is read from a text file
     school_info = file.read() ## read the content of the file and store it in a variable
     
+lines = school_info.splitlines() ## split the content of the file into lines
+
+for line in lines: ## iterate through each line of the school information
+    print(line) ## print each line of the school information
+
 user_message = f"""
 
 Informacje o szkole: {school_info}
