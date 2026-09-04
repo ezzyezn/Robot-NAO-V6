@@ -13,13 +13,13 @@ clean_content = content.lower().translate(
 
 question_words = clean_content.split() ## split the user's question into words and convert them to lowercase
 
-print(question_words)
-
 stop_words = ["i", "czy", "jest", "w", "się", "sie", "na", "o", "z", "to"] ##remove these words from question_words to make the check faster.
 
 found_info = "" ## variable to store the school information that matches the user's question
 
 best_score = 0 ## variable to store the best score for matching lines
+
+minimum_score = 2 ##minimum match score
 
 for line in lines:
     score = 0 ## variable to store the score for the current line
@@ -41,6 +41,9 @@ if best_score == 0: ##if there are no matches, the program stops.
     print("Nie znaleziono informacji")
     exit()
     
+if best_score < minimum_score: ##if the score is too low, the program also stops.
+    print("Nie mam wystarczjących informacji na ten temat.")
+    exit()
 
 user_message = f"""
 
