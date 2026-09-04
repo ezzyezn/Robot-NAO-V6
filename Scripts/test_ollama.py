@@ -11,11 +11,21 @@ question_word = content.lower().split() ## split the user's question into words 
 
 found_info = "" ## variable to store the school information that matches the user's question
 
+best_score = 0 ## variable to store the best score for matching lines
+
 for line in lines:
+    score = 0 ## variable to store the score for the current line
+    
     for word in question_word:
         if word in line.lower():## check if any word from the user's question is present in the school information
-           found_info = line ## if a match is found, add the line to the found_info variable
-           print(word, "->", line) ## if a match is found, add the line to the found_info variable
+            score += 1 ## if a match is found, increment the score for the current line
+            
+    if score > best_score:## if the score for the current line is greater than the best score, update the best score and store the line
+        best_score = score
+        found_info = line
+    
+    print(line, score) ## print the current line and its score
+    
 
 user_message = f"""
 
