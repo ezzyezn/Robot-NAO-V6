@@ -47,4 +47,4 @@ I moved the information from the `school_info` variable to a separate `TXT` file
 
 #
 ### Latest changes:
-[Commit 8b12979](https://github.com/ezzyezn/Robot-NAO-V6/commit/8b1297968d9f93350e490b12e5602271b968295a)
+[Commit 2c9fda4](https://github.com/ezzyezn/Robot-NAO-V6/commit/8b1297968d9f93350e490b12e5602271b968295a)
