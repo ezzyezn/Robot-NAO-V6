@@ -7,7 +7,9 @@ with open("Scripts/school_info.txt", "r", encoding="utf-8") as file: ## school i
     
 lines = school_info.splitlines() ## split the content of the file into lines
 
-question_word = content.lower().split() ## split the user's question into words and convert them to lowercase
+question_words = content.lower().split() ## split the user's question into words and convert them to lowercase
+
+stop_words = ["i", "czy", "jest", "w", "się", "sie", "na", "o", "z", "to"] ##remove these words from question_words to make the check faster.
 
 found_info = "" ## variable to store the school information that matches the user's question
 
@@ -16,7 +18,10 @@ best_score = 0 ## variable to store the best score for matching lines
 for line in lines:
     score = 0 ## variable to store the score for the current line
     
-    for word in question_word:
+    for word in question_words:
+        if word in stop_words: ## сheck if the word matches a stop word.
+            continue
+        
         if word in line.lower():## check if any word from the user's question is present in the school information
             score += 1 ## if a match is found, increment the score for the current line
             
@@ -24,7 +29,7 @@ for line in lines:
         best_score = score
         found_info = line
     
-    print(line, score) ## print the current line and its score
+    print(line, score) ## print the current line and its score-0
     
 
 user_message = f"""
