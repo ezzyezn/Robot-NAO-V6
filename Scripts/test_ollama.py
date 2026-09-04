@@ -1,5 +1,5 @@
 import ollama ##import the ollama module
-
+import string ##a library for removing unnecessary characters and cleaning the text.
 content = input("Enter your message: ") ## prompt the user to enter a message
 
 with open("Scripts/school_info.txt", "r", encoding="utf-8") as file: ## school infromation is read from a text file
@@ -7,7 +7,13 @@ with open("Scripts/school_info.txt", "r", encoding="utf-8") as file: ## school i
     
 lines = school_info.splitlines() ## split the content of the file into lines
 
-question_words = content.lower().split() ## split the user's question into words and convert them to lowercase
+clean_content = content.lower().translate(
+    str.maketrans("","",string.punctuation) ##removes all punctuation marks.
+    )
+
+question_words = clean_content.split() ## split the user's question into words and convert them to lowercase
+
+print(question_words)
 
 stop_words = ["i", "czy", "jest", "w", "się", "sie", "na", "o", "z", "to"] ##remove these words from question_words to make the check faster.
 
