@@ -37,6 +37,10 @@ for line in lines:
     
     print(line, score) ## print the current line and its score-0
     
+if best_score == 0: ##if there are no matches, the program stops.
+    print("Nie znaleziono informacji")
+    exit()
+    
 
 user_message = f"""
 
