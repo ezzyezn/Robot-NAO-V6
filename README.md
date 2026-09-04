@@ -62,4 +62,4 @@ I split the information from `school_info` into separate lines, so the program d
 
 #
 ### Latest changes:
-[Commit 2c9fda4](https://github.com/ezzyezn/Robot-NAO-V6/commit/8b1297968d9f93350e490b12e5602271b968295a)
+[Commit 6eb9e39](https://github.com/ezzyezn/Robot-NAO-V6/commit/6eb9e39f7f6d82fbeb72c3fd9f6794bab1db67e1)
