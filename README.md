@@ -60,6 +60,13 @@ I split the information from `school_info` into separate lines, so the program d
 [Commit 3103cc4](https://github.com/ezzyezn/Robot-NAO-V6/commit/3103cc41ac5bed4111172c5762d551f5e9b56221),
 [Commit 6eb9e39](https://github.com/ezzyezn/Robot-NAO-V6/commit/6eb9e39f7f6d82fbeb72c3fd9f6794bab1db67e1)
 
+### 6.Sixth test
+Now, only information that matches the user’s question is sent to the LLM. Alternative responses were also added for cases when no match is found. This prevents the model from answering unrelated questions and making up incorrect information.
+[Commit a2de900](https://github.com/ezzyezn/Robot-NAO-V6/commit/a2de900fe9f1c7d0d0fb040d23cfd68a5cdc73dd),
+[Commit 8ecea8f](https://github.com/ezzyezn/Robot-NAO-V6/commit/8ecea8fd3e1e108a68350c4f04b05c044980c758),
+[Commit e49aba0](https://github.com/ezzyezn/Robot-NAO-V6/commit/e49aba04cbf8a083bc9830805c3326b009ba5fc5)
+
+
 #
 ### Latest changes:
-[Commit 6eb9e39](https://github.com/ezzyezn/Robot-NAO-V6/commit/6eb9e39f7f6d82fbeb72c3fd9f6794bab1db67e1)
+[Commit e49aba0](https://github.com/ezzyezn/Robot-NAO-V6/commit/e49aba04cbf8a083bc9830805c3326b009ba5fc5)
