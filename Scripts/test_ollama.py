@@ -1,55 +1,69 @@
 import ollama ##import the ollama module
-import string ##a library for removing unnecessary characters and cleaning the text.
-content = input("Enter your message: ") ## prompt the user to enter a message
+import math
+
+
+def cosine_similarity(a ,b):
+    dot_product = 0
+    sum_a = 0
+    sum_b = 0
+    
+    for i in range(len(a)):
+        dot_product += a[i] * b[i]
+        
+    for i in range(len(a)):
+        sum_a += a[i] ** 2
+    
+    for i in range(len(b)):
+        sum_b += b[i] ** 2
+        
+    length_a = math.sqrt(sum_a)
+    length_b = math.sqrt(sum_b)
+    
+    return dot_product / (length_a * length_b)
+
+
+question = input("Enter your message: ") ## prompt the user to enter a message
+
+
+question_embedding = ollama.embed( ## convert the text into a vector
+    model="nomic-embed-text",
+    input=question
+)["embeddings"][0]
+
 
 with open("Scripts/school_info.txt", "r", encoding="utf-8") as file: ## school infromation is read from a text file
     school_info = file.read() ## read the content of the file and store it in a variable
     
+    
 lines = school_info.splitlines() ## split the content of the file into lines
 
-clean_content = content.lower().translate(
-    str.maketrans("","",string.punctuation) ##removes all punctuation marks.
-    )
-
-question_words = clean_content.split() ## split the user's question into words and convert them to lowercase
-
-stop_words = ["i", "czy", "jest", "w", "się", "sie", "na", "o", "z", "to"] ##remove these words from question_words to make the check faster.
 
 found_info = "" ## variable to store the school information that matches the user's question
+best_similarity = 0 ## variable to store the best score for matching lines
 
-best_score = 0 ## variable to store the best score for matching lines
-
-minimum_score = 2 ##minimum match score
 
 for line in lines:
-    score = 0 ## variable to store the score for the current line
+    line_embedding = ollama.embed(
+            model="nomic-embed-text",
+            input=line
+        )["embeddings"][0]
     
-    for word in question_words:
-        if word in stop_words: ## сheck if the word matches a stop word.
-            continue
-        
-        if word in line.lower():## check if any word from the user's question is present in the school information
-            score += 1 ## if a match is found, increment the score for the current line
-            
-    if score > best_score:## if the score for the current line is greater than the best score, update the best score and store the line
-        best_score = score
+    similarity = cosine_similarity(question_embedding,line_embedding)
+    print(line, similarity)
+    
+    if best_similarity < similarity:
+        best_similarity = similarity
         found_info = line
-    
-    print(line, score) ## print the current line and its score-0
-    
-if best_score == 0: ##if there are no matches, the program stops.
-    print("Nie znaleziono informacji")
-    exit()
-    
-if best_score < minimum_score: ##if the score is too low, the program also stops.
-    print("Nie mam wystarczjących informacji na ten temat.")
-    exit()
+
+
+print("BEST INFO: ", found_info)
+print("BEST SIMILARITY:", best_similarity)
 
 user_message = f"""
 
 Informacje o szkole: {found_info}
 
-Pytanie użytkownika: {content}
+Pytanie użytkownika: {question}
 
 """ ##question to be sent to the model, which includes the school information and the user's question
 
@@ -77,4 +91,6 @@ response = ollama.chat( ## call the chat function from the ollama module
          "content": user_message ## content of the message, which is the user's question and the school information
             }, 
     ])
+
+
 print(response['message']['content']) ## print the response from the model
