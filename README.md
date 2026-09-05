@@ -40,7 +40,7 @@ The first attempt to communicate with Ollama using Python code was successful.
 ### 2.Second Test
 In the next test, we enter a question in the terminal after starting the program. The LLM now follows the rules specified in the `content` field for the `system` role and answers only questions related to the given topic. The test was successful. 
 [Commit a51f3b0](https://github.com/ezzyezn/Robot-NAO-V6/commit/a51f3b0081d020857cd4874ccb209efbb4cef4de),
-[Commit d994bb9](https://github.com/ezzyezn/Robot-NAO-V6/commit/d994bb96011788e39cd32f6c0abe9de221d7645f)
+[Commit d994bb9](https://github.com/ezzyezn/Robot-NAO-V6/commit/d994bb96011788e39cd32f6c0abe9de221d7645f).
 *The model does not have the required information yet, so it cannot correctly answer the questions I need. In some cases, the model may make up answers. This is expected at this stage and will be fixed later.*
 
 ### 3.Third test
@@ -66,12 +66,12 @@ Now, only information that matches the user’s question is sent to the LLM. Alt
 [Commit 8ecea8f](https://github.com/ezzyezn/Robot-NAO-V6/commit/8ecea8fd3e1e108a68350c4f04b05c044980c758),
 [Commit e49aba0](https://github.com/ezzyezn/Robot-NAO-V6/commit/e49aba04cbf8a083bc9830805c3326b009ba5fc5)
 
-### 7. test
+### 7.Seventh test
 This is one of the most difficult tests. Here, we need to understand vectors and the dot product. To see how they work, I created the `test_embedding.py` and `test_similarity_scalar.py` files. They show vectors and the dot product with clear examples.
 [Commit 5eb7561](https://github.com/ezzyezn/Robot-NAO-V6/commit/5eb7561a53c4244ba8a7a2cb82791b52c601ff1a),
 [Commit 7f3a2e5](https://github.com/ezzyezn/Robot-NAO-V6/commit/7f3a2e5d9ec5a118ce43d02969d00b25683efa4c),
 [Commit 0d771eb](https://github.com/ezzyezn/Robot-NAO-V6/commit/0d771ebc358f642878ac91a17d6f799e2442d466),
-[Commit ee3bdee](https://github.com/ezzyezn/Robot-NAO-V6/commit/ee3bdeeb7b297e6ee9ba439049666f4a0dca5bac)
+[Commit ee3bdee](https://github.com/ezzyezn/Robot-NAO-V6/commit/ee3bdeeb7b297e6ee9ba439049666f4a0dca5bac).
 *If the "nomic-embed-text" model is not installed, install it using this command in CMD:* `ollama pull nomic-embed-text`
 #
 ### Latest changes:
