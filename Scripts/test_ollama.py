@@ -40,7 +40,7 @@ lines = school_info.splitlines() ## split the content of the file into lines
 
 found_info = "" ## variable to store the school information that matches the user's question
 best_similarity = 0 ## variable to store the best score for matching lines
-
+minimum_similarity = 0.40
 
 for line in lines:
     line_embedding = ollama.embed(
@@ -55,6 +55,9 @@ for line in lines:
         best_similarity = similarity
         found_info = line
 
+if best_similarity < minimum_similarity:
+    print("Nie mam wystarczających informacji na ten temat.")
+    exit()
 
 print("BEST INFO: ", found_info)
 print("BEST SIMILARITY:", best_similarity)
