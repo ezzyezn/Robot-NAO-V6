@@ -1,17 +1,34 @@
 import math
 
-a = [1, 1]
-b = [1, 1]
+a = [1, 1, 1]
+b = [1, 1, 1]
 
-dot_produkt = a[0] * b[0] + a[1] * b[1]
+dot_product = 0
 
-lenght_a = math.sqrt(a[0] ** 2 + a[1] ** 2)
-lenght_b = math.sqrt(b[0] ** 2 + b[1] ** 2)
+sum_a = 0
 
-cosaine_similarity = dot_produkt / (lenght_a * lenght_b)
+sum_b = 0
+
+##dot product
+for i in range(len(a)):
+    dot_product += a[i] * b[i]
+    
+    
+## lenght a
+for i in range(len(a)):
+    sum_a += a[i] ** 2
+    
+length_a = math.sqrt(sum_a)
+
+## lenght b
+for i in range(len(b)):
+    sum_b += b[i] ** 2
+
+length_b = math.sqrt(sum_b)
+
+##similarity
+
+cosine_similarity = dot_product / (length_a * length_b)
 
 
-print("dot product: ",dot_produkt)
-print("lenght a: ",lenght_a)
-print("lenght b: ",lenght_b)
-print("sum: ", cosaine_similarity)
+print(cosine_similarity)
