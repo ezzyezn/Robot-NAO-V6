@@ -1,4 +1,5 @@
 import math
+import ollama
 
 def cosine_similarity(a ,b):
     dot_product = 0
@@ -19,9 +20,19 @@ def cosine_similarity(a ,b):
     
     return dot_product / (length_a * length_b)
 
-a = [1, 1, 1]
-b = [1, 1, 1]
+text1 = "Dyrektorem szkoły jest Iwona Białopiotrowicz"
+text2 = "Kto zarządza szkołą"
 
-result = cosine_similarity(a, b)
+embedding1 = ollama.embed(
+    model="nomic-embed-text",
+    input=text1
+)["embeddings"][0]
+
+embedding2 = ollama.embed(
+    model="nomic-embed-text",
+    input=text2
+)["embeddings"][0]
+
+result = cosine_similarity(embedding1, embedding2)
 
 print(result)
