@@ -26,7 +26,7 @@ question = input("Enter your message: ") ## prompt the user to enter a message
 
 
 question_embedding = ollama.embed( ## convert the text into a vector
-    model="nomic-embed-text",
+    model="qwen3-embedding:0.6b",
     input=question
 )["embeddings"][0]
 
@@ -44,7 +44,7 @@ best_similarity = 0 ## variable to store the best score for matching lines
 
 for line in lines:
     line_embedding = ollama.embed(
-            model="nomic-embed-text",
+            model="qwen3-embedding:0.6b",
             input=line
         )["embeddings"][0]
     
@@ -71,18 +71,21 @@ response = ollama.chat( ## call the chat function from the ollama module
     model="llama3.2:3b", ## name of the model we will use
     messages=[
         {   "role": "system", ## role of the message sender, a role for setting rules for the LLM
-            "content": """ 
+            "content": """
                             Jesteś asystentem AI Technikum TEB Edukacja.
 
-                            Odpowiadaj tylko na pytania dotyczące Technikum TEB Edukacja.
+                            Odpowiadaj tylko na podstawie informacji podanych w sekcji
+                            "Informacje o szkole".
 
-                            Odpowiadaj WYŁĄCZNIE na podstawie informacji,
-                            które otrzymasz w wiadomości użytkownika.
+                            Jeżeli informacja odpowiada na pytanie użytkownika,
+                            udziel krótkiej i bezpośredniej odpowiedzi.
 
-                            Jeżeli nie masz wystarczających informacji, odpowiedz:
+                            Możesz parafrazować pytanie użytkownika, ale nie zmieniaj faktów.
+
+                            Jeżeli informacji naprawdę nie ma, odpowiedz:
                             "Nie mam wystarczających informacji na ten temat."
 
-                            Nie wymyślaj informacji.
+                            Nie dodawaj informacji, których nie ma w podanym kontekście.
                         """ ##Instructions for the model to follow when generating a response
             
             },
