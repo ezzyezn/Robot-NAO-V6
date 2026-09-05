@@ -73,6 +73,11 @@ This is one of the most difficult tests. Here, we need to understand vectors and
 [Commit 0d771eb](https://github.com/ezzyezn/Robot-NAO-V6/commit/0d771ebc358f642878ac91a17d6f799e2442d466),
 [Commit ee3bdee](https://github.com/ezzyezn/Robot-NAO-V6/commit/ee3bdeeb7b297e6ee9ba439049666f4a0dca5bac).
 *If the "nomic-embed-text" model is not installed, install it using this command in CMD:* `ollama pull nomic-embed-text`
+
+### 8.Eighth test
+I added the *"nomic-embed-text"* model to the project and cleaned up the code, but the tests failed.I also updated the `school_info.txt` file.
+[Commit dc76f1b](https://github.com/ezzyezn/Robot-NAO-V6/commit/dc76f1b1e807c5db15eb0e08fd32da09ba69f230),
+[Commit befbaed](https://github.com/ezzyezn/Robot-NAO-V6/commit/befbaedfb01af791163aa833349898af895ea898)
 #
 ### Latest changes:
-[Commit ee3bdee](https://github.com/ezzyezn/Robot-NAO-V6/commit/ee3bdeeb7b297e6ee9ba439049666f4a0dca5bac)
+[Commit befbaed](https://github.com/ezzyezn/Robot-NAO-V6/commit/befbaedfb01af791163aa833349898af895ea898)
