@@ -78,6 +78,21 @@ This is one of the most difficult tests. Here, we need to understand vectors and
 I added the *"nomic-embed-text"* model to the project and cleaned up the code, but the tests failed.I also updated the `school_info.txt` file.
 [Commit dc76f1b](https://github.com/ezzyezn/Robot-NAO-V6/commit/dc76f1b1e807c5db15eb0e08fd32da09ba69f230),
 [Commit befbaed](https://github.com/ezzyezn/Robot-NAO-V6/commit/befbaedfb01af791163aa833349898af895ea898)
+
+### 9.Ninth test
+I switched from *"nomic-embed-text"* to *"qwen3-embedding:0.6b"*, which gave better results. I also corrected the text, added a minimum similarity score to filter out unrelated information, and added an extra check to improve information selection. The test was successfu.
+[Commit 6d6e6c4](https://github.com/ezzyezn/Robot-NAO-V6/commit/6d6e6c472d1254bdb0d7db1a9e189152b55b520b),
+[Commit e475bb9](https://github.com/ezzyezn/Robot-NAO-V6/commit/e475bb91fdf0559a79de9d3f5489243a34898c3a),
+[Commit a547d59](https://github.com/ezzyezn/Robot-NAO-V6/commit/a547d59cfba5566b86b1b78a93e5a0067dff49b5).
+*If the "qwen3-embedding:0.6b" model is not installed, install it using this command in CMD:* `ollama pull qwen3-embedding:0.6b`
+
+### 10.Tenth test
+My project now looks much cleaner. The code is divided into several files, and each file has its own task. I updated the code comments, improved the LLM workflow, and added a large database with information about the school. However, there is now a major problem: the LLM takes a long time to answer. This happens because many lines of information must be converted into vectors one by one and then compared to find the best match. Also, the *"qwen3-embedding:0.6b"* model sometimes selects incorrect information because it considers it more similar to the question than the correct information. I will continue working on this problem. The test was not completely successful.
+[Commit 711ea0b](https://github.com/ezzyezn/Robot-NAO-V6/commit/711ea0bd0d92264d7ad52790f397043368802bb7),
+[Commit 412324e](https://github.com/ezzyezn/Robot-NAO-V6/commit/412324ed2f5758afcd2658f566e809166dc56519),
+[Commit 1ac820c](https://github.com/ezzyezn/Robot-NAO-V6/commit/1ac820cc7e3c62efaf8c2affeacda91defa579e5),
+[Commit e34e05b](https://github.com/ezzyezn/Robot-NAO-V6/commit/e34e05b98708fa4d52405da1136e6d431c5cd97c)
+
 #
 ### Latest changes:
 [Commit e475bb9](https://github.com/ezzyezn/Robot-NAO-V6/commit/e475bb91fdf0559a79de9d3f5489243a34898c3a)
