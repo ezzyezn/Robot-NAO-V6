@@ -1,5 +1,6 @@
 import ollama
 
+# Check if the found information can answer the users question
 def check_relevance(question, info):
     response = ollama.chat(
         model = "llama3.2:3b",
@@ -35,13 +36,17 @@ def check_relevance(question, info):
         ]
     )
     
+    # Get the models answer
     answer = response["message"]["content"]
     
+    # Retunrn True only if the model answered "TAK"
     return answer.strip().upper() == "TAK"
 
 
-
+# Generate the final answer for the user
 def generate_answer(question, info):
+    
+    # Create a message with the found information and the users question
     user_message = f"""
 
         Informacje o szkole: {info}
@@ -79,4 +84,5 @@ def generate_answer(question, info):
     ]
     )
     
+    # Return the generated answer
     return response["message"]["content"]
