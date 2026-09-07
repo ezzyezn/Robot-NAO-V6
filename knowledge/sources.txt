@@ -1,0 +1,22 @@
+ŹRÓDŁA — TEN PLIK NIE POWINIEN BYĆ ŁADOWANY DO EMBEDDINGÓW.
+Odczyt i weryfikacja: 2026-09-07.
+
+TEB Technikum Gdańsk:
+https://szkolasrednia.teb.pl/szkoly/d/technikum/gdansk/
+
+TEB Liceum Gdańsk:
+https://szkolasrednia.teb.pl/szkoly/d/liceum/gdansk/
+
+TEB Liceum Plastyczne Gdańsk:
+https://szkolasrednia.teb.pl/szkoly/d/liceum-plastyczne/gdansk/
+
+Kontakty:
+https://szkolasrednia.teb.pl/miasta/d/gdansk/kontakt/
+
+Nasza szkoła:
+https://szkolasrednia.teb.pl/miasta/d/gdansk/nasza-szkola/
+
+Strefa słuchacza:
+https://teb.pl/oddzialy/d/gdansk/strefa-sluchacza/
+
+UWAGA: strona „Strefa słuchacza” nie zwróciła treści w użytym odczycie internetowym, dlatego w tej wersji nie dodano nowych faktów wyłącznie na podstawie tej strony.

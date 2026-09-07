@@ -1,3 +1,9 @@
-TEB Gdańsk | Szkoły średnie | Organizacja nauki | Szkoła opisuje ocenianie punktowe, indywidualizację nauczania oraz łączenie teorii z praktyką. Deklaruje uprawnienia szkół publicznych. | Źródło: https://szkolasrednia.teb.pl/miasta/d/gdansk/nasza-szkola/ | Data odczytu: 2026-09-07
-TEB Gdańsk | TEB Technikum | Nauka i wyposażenie | Strona przedstawia przygotowanie do egzaminów, pracy zawodowej i studiów, nauczycieli z praktyką zawodową, wyposażone sale oraz koła tematyczne, warsztaty i projekty praktyczne. | Źródło: https://szkolasrednia.teb.pl/szkoly/d/technikum/gdansk/ | Data odczytu: 2026-09-07
-TEB Gdańsk | TEB Technikum; TEB Liceum; TEB Liceum Plastyczne | Lokalizacja szkoły | Sekcja Lokalizacja podaje ul. Dmowskiego 16A, 80-264 Gdańsk. Jest to adres oznaczony jako lokalizacja szkoły; osobny adres sekretariatu znajduje się w danych kontaktowych. | Źródło: https://szkolasrednia.teb.pl/miasta/d/gdansk/nasza-szkola/ | Data odczytu: 2026-09-07
+TEB Gdańsk | SZKOŁY ŚREDNIE | TYPY SZKÓŁ | W Gdańsku działają TEB Technikum, TEB Liceum oraz TEB Liceum Plastyczne.
+TEB Gdańsk | SZKOŁY ŚREDNIE | LOKALIZACJA NAUKI | TEB Technikum, TEB Liceum i TEB Liceum Plastyczne są wskazane przy ul. Dmowskiego 16A, 80-264 Gdańsk.
+TEB Gdańsk | SZKOŁY ŚREDNIE | UPRAWNIENIA | Oficjalna strona TEB informuje, że szkoły mają uprawnienia szkół publicznych.
+TEB Gdańsk | SZKOŁY ŚREDNIE | SYSTEM OCENIANIA | Szkoła opisuje elastyczny system oceniania, w którym stosowane są punkty zamiast tradycyjnych ocen cząstkowych.
+TEB Gdańsk | SZKOŁY ŚREDNIE | INDYWIDUALNE PODEJŚCIE | Szkoła informuje o dostosowywaniu metod i podejścia nauczycieli do potrzeb uczniów.
+TEB Technikum Gdańsk | INFORMACJA OGÓLNA | NAUCZYCIELE | Oficjalna strona informuje o nauczycielach z praktyką zawodową przygotowujących uczniów do egzaminów i pracy w zawodzie.
+TEB Technikum Gdańsk | INFORMACJA OGÓLNA | INFRASTRUKTURA | Oficjalna strona informuje o salach wyposażonych w sprzęt i pomoce dydaktyczne do praktycznej nauki.
+TEB Technikum Gdańsk | INFORMACJA OGÓLNA | ZAJĘCIA DODATKOWE | Uczniowie mogą rozwijać zainteresowania na kołach tematycznych, warsztatach i projektach praktycznych.
+TEB Gdańsk | DORADCA EDUKACYJNY | TELEFON | Bezpłatna konsultacja z Doradcą Edukacyjnym: +48 780 710 473.
