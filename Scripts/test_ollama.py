@@ -2,7 +2,7 @@ import ollama ##import the ollama module
 import math
 
 
-def cosine_similarity(a ,b):
+def cosine_similarity(a ,b): ## function cosaine similarity
     dot_product = 0
     sum_a = 0
     sum_b = 0
@@ -21,6 +21,44 @@ def cosine_similarity(a ,b):
     
     return dot_product / (length_a * length_b)
 
+def check_relevance(question, info):
+    response = ollama.chat(
+        model = "llama3.2:3b",
+        messages=[
+            {
+                "role": "system",
+                "content": """
+                            Jesteś filtrem sprawdzającym informacje.
+
+                            Odpowiedz WYŁĄCZNIE:
+                            TAK
+                            lub
+                            NIE
+
+                            Odpowiedz TAK tylko wtedy, gdy podana informacja
+                            bezpośrednio lub jednoznacznie pozwala odpowiedzieć na pytanie.
+
+                            Jeżeli trzeba zgadywać, dodawać nowe fakty
+                            lub zmieniać znaczenie informacji, odpowiedz NIE.
+                            """
+            }, {
+                "role": "user",
+                "content": f"""
+                
+                Pytanie:
+                {question}
+                
+                Informacja:
+                {info}
+                
+                """
+            }
+        ]
+    )
+    
+    answer = response["message"]["content"]
+    
+    return answer.strip().upper() == "TAK"
 
 question = input("Enter your message: ") ## prompt the user to enter a message
 
@@ -40,27 +78,35 @@ lines = school_info.splitlines() ## split the content of the file into lines
 
 found_info = "" ## variable to store the school information that matches the user's question
 best_similarity = 0 ## variable to store the best score for matching lines
-minimum_similarity = 0.40
+minimum_similarity = 0.40 ## minimum similarity
 
 for line in lines:
     line_embedding = ollama.embed(
             model="qwen3-embedding:0.6b",
             input=line
-        )["embeddings"][0]
+        )["embeddings"][0] ## converts the line content into a vector for comparison
     
-    similarity = cosine_similarity(question_embedding,line_embedding)
+    similarity = cosine_similarity(question_embedding,line_embedding) ##use a function
     print(line, similarity)
     
     if best_similarity < similarity:
         best_similarity = similarity
-        found_info = line
+        found_info = line ## sending the required information
 
-if best_similarity < minimum_similarity:
+if best_similarity < minimum_similarity: ## if the minimum similarity is note reached
     print("Nie mam wystarczających informacji na ten temat.")
     exit()
 
 print("BEST INFO: ", found_info)
 print("BEST SIMILARITY:", best_similarity)
+
+is_relevant = check_relevance(question, found_info)
+
+print("RELEVANCE:", is_relevant )
+
+if not is_relevant:
+    print("Nie mam wystarczających informacji na ten temat.")
+    exit()
 
 user_message = f"""
 
