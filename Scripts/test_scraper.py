@@ -1,9 +1,9 @@
 from scraper import load_cache, update_cache_from_irls, split_text
 import os
-from retrieval import create_embeddings, save_embeddings
+from retrieval import create_embeddings, save_embeddings, load_embeddings
 
 cache_file = "Scripts/school_cache.txt"
-json_file = "Scripts/embeddings.json"
+embeddings_file = "Scripts/embeddings.json"
 
 urls = ["https://szkolasrednia.teb.pl/miasta/d/gdansk/kontakt/",
        "https://szkolasrednia.teb.pl/miasta/d/gdansk/nasza-szkola/"]
@@ -26,10 +26,12 @@ all_text = load_cache(cache_file)
 
 chunks = split_text(all_text)
 
-embed = create_embeddings(chunks)
-
-save_embeddings = save_embeddings(embed,json_file )
-
+if os.path.exists(embeddings_file) and update != "y":
+    embeddings = load_embeddings(embeddings_file)
+else:
+    embeddings = create_embeddings(chunks)
+    save_embeddings(embeddings, embeddings_file)
+    
 print("Chunks:", len(chunks))
-print("Embeddings: ", len(embed))
+print("Embeddings: ", len(embeddings))
 
