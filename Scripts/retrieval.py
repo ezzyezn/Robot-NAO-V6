@@ -2,6 +2,7 @@ import ollama
 import json
 from similarity import cosine_similarity
 
+
 def create_embeddings(chunks):
     response = ollama.embed(
         model="qwen3-embedding:0.6b",
@@ -10,20 +11,24 @@ def create_embeddings(chunks):
     
     return response["embeddings"]
 
+
 def save_embeddings(embeddings, filename):
     with open(filename, "w", encoding="utf-8") as file:
-        json.dump(embeddings,file)
+        json.dump(embeddings, file)
+
 
 def load_embeddings(filename):
     with open(filename, "r", encoding="utf-8") as file:
         return json.load(file)
-    
+
+
 def find_best_chunk(question, chunks, embeddings):
     question_embedding = ollama.embed(
         model="qwen3-embedding:0.6b",
         input=question
     )["embeddings"][0]
-    
+
+
     best_chunk = ""
     best_similarity = 0
     

@@ -32,9 +32,9 @@ def extract_contact_sections(html):
     liceum = text[plastyczne_location:domowa_location]
 
     liceum = liceum.replace(
-    "Lokalizacja TEB Liceum Plastyczne",
-    "",
-    1
+        "Lokalizacja TEB Liceum Plastyczne",
+        "",
+        1
     )
 
     technikum = technikum.replace(

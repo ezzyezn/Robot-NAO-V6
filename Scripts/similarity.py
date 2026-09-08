@@ -1,7 +1,7 @@
 import math
 
 # Calculate cosine similarity between two vectors
-def cosine_similarity(a ,b):
+def cosine_similarity(a, b):
     dot_product = 0
     sum_a = 0
     sum_b = 0
