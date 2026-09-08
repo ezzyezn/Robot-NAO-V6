@@ -107,6 +107,11 @@ My project now looks much cleaner. The code is divided into several files, and e
 [Commit 1ac820c](https://github.com/ezzyezn/Robot-NAO-V6/commit/1ac820cc7e3c62efaf8c2affeacda91defa579e5),
 [Commit e34e05b](https://github.com/ezzyezn/Robot-NAO-V6/commit/e34e05b98708fa4d52405da1136e6d431c5cd97c)
 
+### 11.Eleventh test
+I removed the entire database that I created earlier and decided to use a different approach: searching for information on the school website. The test was partly successful. The code gets information from the website, but there is not enough information to answer the questions.
+
+[Commit bb65180](https://github.com/ezzyezn/Robot-NAO-V6/commit/bb65180d8df35b62a31b6456e85628e400c195ff)
+
 #
 ### Latest changes:
-[Commit e34e05b](https://github.com/ezzyezn/Robot-NAO-V6/commit/e34e05b98708fa4d52405da1136e6d431c5cd97c)
+[Commit bb65180](https://github.com/ezzyezn/Robot-NAO-V6/commit/bb65180d8df35b62a31b6456e85628e400c195ff)
