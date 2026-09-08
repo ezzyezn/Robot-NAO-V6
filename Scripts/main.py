@@ -1,16 +1,9 @@
 # Import functions from other project files
 from retrieval import find_best_info
 from llm import check_relevance, generate_answer
-from knowledge import load_school_info
 
 # Ask the user to enter a question
 question = input("Enter your message: ") 
-
-# Load school information from the local knowledge file
-lines = load_school_info()
-
-# Find the most similar information for the users question
-found_info, best_similarity = find_best_info(question, lines)
 
 # Minimum similarity required to contiune
 minimum_similarity = 0.40 

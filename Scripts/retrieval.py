@@ -25,13 +25,13 @@ def find_best_chunk(question, chunks, embeddings):
     )["embeddings"][0]
     
     best_chunk = ""
-    best_simularity = 0
+    best_similarity = 0
     
     for chunk, chunk_embedding in zip(chunks, embeddings):
         similarity = cosine_similarity(question_embedding,
                                        chunk_embedding)
-        if similarity > best_simularity:
-            best_simularity = similarity
+        if similarity > best_similarity:
+            best_similarity = similarity
             best_chunk = chunk
     
-    return best_chunk, best_simularity
+    return best_chunk, best_similarity

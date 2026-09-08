@@ -18,12 +18,6 @@ def save_text(text, filename):
     with open (filename, "w", encoding="utf-8") as file:
         file.write(text)
 
-def update_cache(url, filename):
-    html = download_page(url)
-    text = extract_text(html)
-    save_text
-    (text, filename)
-
 def load_cache(filename):
     with open(filename, "r", encoding="utf-8") as file:
         return file.read()
@@ -55,24 +49,6 @@ def split_text(text,chunk_size=500):
         chunks.append(chunk)
         
     return chunks
-
-def inspect_school_blocks(html):
-    soup = BeautifulSoup(html, "html.parser")
-    
-    for tag in soup.find_all(string=True):
-        text = tag.strip()
-        
-        if text == "TEB Technikum":
-            parent = tag.parent
-
-            for i in range(6):
-                print("LEVEL:", i)
-                print("TAG:", parent.name)
-                print("CLASS:", parent.get("class"))
-                print("ID:", parent.get("id"))
-                print()
-
-                parent = parent.parent
                 
 def extract_contact_sections(html):
     text = extract_text(html)
