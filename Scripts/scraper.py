@@ -1,14 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 
-####################################################################################
 
 def download_page(url):
     response = requests.get(url, timeout=10)
     
     return response.text
 
-####################################################################################
 
 def extract_text(html):
     soup = BeautifulSoup(html, "html.parser")
@@ -18,7 +16,6 @@ def extract_text(html):
         
     return soup.get_text(separator=" ", strip=True)
 
-####################################################################################
 
 def extract_contact_sections(html):
     text = extract_text(html)
@@ -54,21 +51,18 @@ def extract_contact_sections(html):
 
     return liceum, technikum, plastyczne
 
-####################################################################################
 
 def save_text(text, filename):
-    with open (filename, "w", encoding="utf-8") as file:
+    with open(filename, "w", encoding="utf-8") as file:
         file.write(text)
 
-####################################################################################
 
 def load_cache(filename):
     with open(filename, "r", encoding="utf-8") as file:
         return file.read()
 
-####################################################################################
 
-def update_cache_from_urls(urls,filename):
+def update_cache_from_urls(urls, filename):
     all_text = ""
     for url in urls:
             html = download_page(url)
@@ -86,13 +80,12 @@ def update_cache_from_urls(urls,filename):
     
     save_text(all_text, filename)
     
-####################################################################################
 
-def split_text(text,chunk_size=500):
+def split_text(text, chunk_size=500):
     chunks = []
     
     for i in range(0, len(text), chunk_size):
-        chunk = text [i:i + chunk_size]
+        chunk = text[i:i + chunk_size]
         
         chunks.append(chunk)
         
