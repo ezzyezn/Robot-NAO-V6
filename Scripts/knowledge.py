@@ -1,9 +1,21 @@
-# Load school information from the TXT file
+from pathlib import Path
+
+# Path to the folder with all knowledge files
+knowledge_dir = Path(__file__).resolve().parent.parent / "knowledge"
+
 def load_school_info():
-    # Open the file with school information
-    with open("Scripts/school_info.txt", "r", encoding="utf-8") as file: 
-        # Read all text from the file
-        school_info = file.read()
+    lines = []
     
-    # Split the text into separate lines
-    return school_info.splitlines()
+    # Load every .txt file except the source metadata file
+    for file_path in knowledge_dir.glob("*.txt"):
+        if file_path.name == "sources.txt":
+            continue
+        
+        with open(file_path, "r", encoding="utf-8") as file:
+            for line in file:
+               line =  line.strip()
+               
+               if line:
+                   lines.append(line)
+                   
+    return(lines)
