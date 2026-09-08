@@ -17,3 +17,13 @@ def extract_text(html):
 def save_text(text, filename):
     with open (filename, "w", encoding="utf-8") as file:
         file.write(text)
+
+def update_cache(url, filename):
+    html = download_page(url)
+    text = extract_text(html)
+    save_text
+    (text, filename)
+
+def load_cache(filename):
+    with open(filename, "r", encoding="utf-8") as file:
+        return file.read()

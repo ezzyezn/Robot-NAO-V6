@@ -1,9 +1,10 @@
-from scraper import download_page, extract_text, save_text
+from scraper import update_cache, load_cache
 import os
 
 cache_file = "Scripts/school_cache.txt"
 
-url = "https://szkolasrednia.teb.pl/miasta/d/gdansk/kontakt/"
+url = ["https://szkolasrednia.teb.pl/miasta/d/gdansk/kontakt/",
+       "https://szkolasrednia.teb.pl/miasta/d/gdansk/nasza-szkola/"]
 
 update = input("Update cache? (y/n): ")
 
@@ -15,9 +16,10 @@ else:
         
     print("Downloading page...")
 
-    html = download_page(url)
-    text = extract_text(html)
-
-    save_text(text, cache_file)
+    update_cache(url, cache_file)
 
     print("Page downloaded")
+
+text = load_cache(cache_file)
+
+print(text[:1000])
