@@ -1,10 +1,13 @@
 import os
 
 from scraper import load_cache, update_cache_from_urls, split_text
-from retrieval import (create_embeddings,
-                       save_embeddings,
-                       load_embeddings,
-                       find_best_chunk)
+from retrieval import (
+    create_embeddings,
+    save_embeddings,
+    load_embeddings,
+    find_best_chunk,
+    find_top_chunks
+)
 
 
 cache_file = "Scripts/school_cache.txt"
@@ -44,14 +47,18 @@ else:
 question = input("Ask a question: ")
 
 
-best_chunk, best_similarity = find_best_chunk(question,
-                                              chunks,
-                                              embeddings)
+top_chunks = find_top_chunks(
+    question,
+    chunks,
+    embeddings
+)
+
+
+for i, (chunk, similarity) in enumerate(top_chunks, start=1):
+    print(f"\nTOP {i}:")
+    print(chunk)
+    print("SIMILARITY:", similarity)
 
 
 print("BEST CHUNK: ")
-print(best_chunk)
-
-
-print("BEST SIMILARITY:",best_similarity)
-
+print(top_chunks)

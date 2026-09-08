@@ -69,24 +69,72 @@ def update_cache_from_urls(urls, filename):
             
         if "kontakt" in url:
             liceum, technikum, plastyczne = extract_contact_sections(html)
+            
+            all_text += "=== SOURCE: KONTAKT ===\n\n"
                 
-            all_text += "=== LICEUM ===\n" + liceum + "\n\n"
-            all_text += "=== TECHNIKUM ===\n" + technikum + "\n\n"
-            all_text += "=== LICEUM PLASTYCZNE ===\n" + plastyczne + "\n\n"
+            all_text += "--- LICEUM ---\n" + liceum + "\n\n"
+            all_text += "--- TECHNIKUM ---\n" + technikum + "\n\n"
+            all_text += "--- LICEUM PLASTYCZNE ---\n" + plastyczne + "\n\n"
         else:
             text = extract_text(html)
+            
+            all_text += "=== SOURCE: NASZA SZKOLA ===\n\n"
+            all_text += text + "\n\n"
                 
             all_text += text + "\n\n"
     
     save_text(all_text, filename)
     
 
-def split_text(text, chunk_size=500):
+def split_text(text, chunk_size=500, overlap=100):
     chunks = []
+    step = chunk_size - overlap
     
-    for i in range(0, len(text), chunk_size):
-        chunk = text[i:i + chunk_size]
+    
+    source = ""
+    section = ""
+    
+    
+    blocks = text.split("\n\n")
+    
+    
+    for block in blocks:
+        block = block.strip()
         
-        chunks.append(chunk)
+        
+        if not block:
+            continue
+        
+        
+        if block.startswith("=== SOURCE:"):
+            source = block
+            continue
+        
+                
+        if block.startswith("---") and block.endswith("---"):
+            section = block
+            continue
+        
+        
+        for i in range(0, len(block), step):
+            chunk = block[i:i + chunk_size]
+            
+            
+            chunk_text = ""
+            
+            
+            if source:
+                chunk_text += source + "\n"
+            
+            
+            if section:
+                chunk_text += section + "\n"
+                
+                
+            chunk_text += chunk
+            
+            
+            chunks.append(chunk)
+    
         
     return chunks
