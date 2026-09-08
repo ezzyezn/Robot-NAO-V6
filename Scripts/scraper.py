@@ -65,18 +65,18 @@ def load_cache(filename):
 def update_cache_from_urls(urls, filename):
     all_text = ""
     for url in urls:
-            html = download_page(url)
+        html = download_page(url)
             
-            if "kontakt" in url:
-                liceum, technikum, plastyczne = extract_contact_sections(html)
+        if "kontakt" in url:
+            liceum, technikum, plastyczne = extract_contact_sections(html)
                 
-                all_text += "=== LICEUM ===\n" + liceum + "\n\n"
-                all_text += "=== TECHNIKUM ===\n" + technikum + "\n\n"
-                all_text += "=== LICEUM PLASTYCZNE ===\n" + plastyczne + "\n\n"
-            else:
-                text = extract_text(html)
+            all_text += "=== LICEUM ===\n" + liceum + "\n\n"
+            all_text += "=== TECHNIKUM ===\n" + technikum + "\n\n"
+            all_text += "=== LICEUM PLASTYCZNE ===\n" + plastyczne + "\n\n"
+        else:
+            text = extract_text(html)
                 
-                all_text += text + "\n\n"
+            all_text += text + "\n\n"
     
     save_text(all_text, filename)
     
