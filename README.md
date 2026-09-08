@@ -114,4 +114,4 @@ I removed the entire database that I created earlier and decided to use a differ
 
 #
 ### Latest changes:
-[Commit e34e05b](https://github.com/ezzyezn/Robot-NAO-V6/commit/e34e05b98708fa4d52405da1136e6d431c5cd97c)
+[Commit bb65180](https://github.com/ezzyezn/Robot-NAO-V6/commit/bb65180d8df35b62a31b6456e85628e400c195ff)
