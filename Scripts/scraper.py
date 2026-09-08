@@ -34,11 +34,15 @@ def update_cache_from_urls(urls,filename):
             html = download_page(url)
             
             if "kontakt" in url:
-                inspect_school_blocks(html)
-            
-            text = extract_text(html)
-            
-            all_text += text + "\n\n"
+                liceum, technikum, plastyczne = extract_contact_sections(html)
+                
+                all_text += "=== LICEUM ===\n" + liceum + "\n\n"
+                all_text += "=== TECHNIKUM ===\n" + technikum + "\n\n"
+                all_text += "=== LICEUM PLASTYCZNE ===\n" + plastyczne + "\n\n"
+            else:
+                text = extract_text(html)
+                
+                all_text += text + "\n\n"
     
     save_text(all_text, filename)
     
@@ -58,9 +62,48 @@ def inspect_school_blocks(html):
     for tag in soup.find_all(string=True):
         text = tag.strip()
         
-        if text in ["TEB Liceum", "TEB Technikum", "TEB Liceum Plastyczne"]:
-            print("TEXT:", text)
-            print("TAG:", tag.parent.name)
-            print("CLASS:", tag.parent.get("class"))
-            print("ID:", tag.parent.get("id"))
-            print()
+        if text == "TEB Technikum":
+            parent = tag.parent
+
+            for i in range(6):
+                print("LEVEL:", i)
+                print("TAG:", parent.name)
+                print("CLASS:", parent.get("class"))
+                print("ID:", parent.get("id"))
+                print()
+
+                parent = parent.parent
+                
+def extract_contact_sections(html):
+    text = extract_text(html)
+
+    liceum_location = text.find("Lokalizacja TEB Liceum ")
+    technikum_location = text.find("Lokalizacja TEB Technikum ")
+    plastyczne_location = text.find("Lokalizacja TEB Liceum Plastyczne")
+    domowa_location = text.find("Lokalizacja TEB Edukacja Domowa")
+
+    technikum = text[liceum_location:technikum_location]
+
+    plastyczne = text[technikum_location:plastyczne_location]
+
+    liceum = text[plastyczne_location:domowa_location]
+
+    liceum = liceum.replace(
+    "Lokalizacja TEB Liceum Plastyczne",
+    "",
+    1
+    )
+
+    technikum = technikum.replace(
+        "Lokalizacja TEB Liceum",
+        "",
+        1
+    )
+
+    plastyczne = plastyczne.replace(
+        "Lokalizacja TEB Technikum",
+        "",
+        1
+    )
+
+    return liceum, technikum, plastyczne
