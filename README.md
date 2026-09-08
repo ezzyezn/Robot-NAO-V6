@@ -26,6 +26,7 @@ Download the first local LLM using the command `ollama pull llama3.2:3b`. After 
 
 ### 7.Creating a Python file
 Create a Python file `test_ollama.py` to work with Ollama. 
+
 [Commit 44fa659](https://github.com/ezzyezn/Robot-NAO-V6/commit/44fa659fd820090ff111a0ae712b9d03fab528dd)
 
 ### 8.Install Ollama package
@@ -35,25 +36,31 @@ We also install the official Ollama package for Python. To do this, run `pip ins
 
 ### 1.First test
 The first attempt to communicate with Ollama using Python code was successful. 
+
 [Commit 25364c9](https://github.com/ezzyezn/Robot-NAO-V6/commit/25364c9f4a63638928a220a20e6facbad7fdb32a)
 
 ### 2.Second Test
 In the next test, we enter a question in the terminal after starting the program. The LLM now follows the rules specified in the `content` field for the `system` role and answers only questions related to the given topic. The test was successful. 
+
 [Commit a51f3b0](https://github.com/ezzyezn/Robot-NAO-V6/commit/a51f3b0081d020857cd4874ccb209efbb4cef4de),
 [Commit d994bb9](https://github.com/ezzyezn/Robot-NAO-V6/commit/d994bb96011788e39cd32f6c0abe9de221d7645f).
+
 *The model does not have the required information yet, so it cannot correctly answer the questions I need. In some cases, the model may make up answers. This is expected at this stage and will be fixed later.*
 
 ### 3.Third test
 In this test, I added information for the LLM to use. The test was successful. 
+
 [Commit 86ca1c6](https://github.com/ezzyezn/Robot-NAO-V6/commit/86ca1c6426b24ba4dcbec7402b22f43ece93bc59)
 
 ### 4.Fourth test
 I moved the information from the `school_info` variable to a separate `TXT` file. I also changed the format for sending requests to the LLM chat to make the code cleaner and easier to understand. The test was successful. 
+
 [Commit 98abfab](https://github.com/ezzyezn/Robot-NAO-V6/commit/98abfaba2b6162e671f79733bbe96459beb0bd46), 
 [Commit 8b12979](https://github.com/ezzyezn/Robot-NAO-V6/commit/8b1297968d9f93350e490b12e5602271b968295a)
 
 ### 5.Fifth test
 I split the information from `school_info` into separate lines, so the program does not need to check the whole text at once. I also split the user’s question into words. This helps the program find the correct line more accurately. I used the `best_score` and `score` variables to clearly show how the search works. I also added *stop words*. They are ignored when checking the lines, so common linking words do not increase the score.
+
 [Commit 7906c2b](https://github.com/ezzyezn/Robot-NAO-V6/commit/7906c2b4f4fafa4d49a3ed50f7b7dd4ba95d9e75),
 [Commit 349be3b](https://github.com/ezzyezn/Robot-NAO-V6/commit/349be3b0d5e8b8721d93a2e37bff5e8ca4a7d6c6),
 [Commit 2c9fda4](https://github.com/ezzyezn/Robot-NAO-V6/commit/2c9fda4b7952bdd322dd5fe2ea0132c118447cc6),
@@ -62,22 +69,44 @@ I split the information from `school_info` into separate lines, so the program d
 
 ### 6.Sixth test
 Now, only information that matches the user’s question is sent to the LLM. Alternative responses were also added for cases when no match is found. This prevents the model from answering unrelated questions and making up incorrect information.
+
 [Commit a2de900](https://github.com/ezzyezn/Robot-NAO-V6/commit/a2de900fe9f1c7d0d0fb040d23cfd68a5cdc73dd),
 [Commit 8ecea8f](https://github.com/ezzyezn/Robot-NAO-V6/commit/8ecea8fd3e1e108a68350c4f04b05c044980c758),
 [Commit e49aba0](https://github.com/ezzyezn/Robot-NAO-V6/commit/e49aba04cbf8a083bc9830805c3326b009ba5fc5)
 
 ### 7.Seventh test
 This is one of the most difficult tests. Here, we need to understand vectors and the dot product. To see how they work, I created the `test_embedding.py` and `test_similarity_scalar.py` files. They show vectors and the dot product with clear examples.
+
 [Commit 5eb7561](https://github.com/ezzyezn/Robot-NAO-V6/commit/5eb7561a53c4244ba8a7a2cb82791b52c601ff1a),
 [Commit 7f3a2e5](https://github.com/ezzyezn/Robot-NAO-V6/commit/7f3a2e5d9ec5a118ce43d02969d00b25683efa4c),
 [Commit 0d771eb](https://github.com/ezzyezn/Robot-NAO-V6/commit/0d771ebc358f642878ac91a17d6f799e2442d466),
 [Commit ee3bdee](https://github.com/ezzyezn/Robot-NAO-V6/commit/ee3bdeeb7b297e6ee9ba439049666f4a0dca5bac).
+
 *If the "nomic-embed-text" model is not installed, install it using this command in CMD:* `ollama pull nomic-embed-text`
 
 ### 8.Eighth test
 I added the *"nomic-embed-text"* model to the project and cleaned up the code, but the tests failed.I also updated the `school_info.txt` file.
+
 [Commit dc76f1b](https://github.com/ezzyezn/Robot-NAO-V6/commit/dc76f1b1e807c5db15eb0e08fd32da09ba69f230),
 [Commit befbaed](https://github.com/ezzyezn/Robot-NAO-V6/commit/befbaedfb01af791163aa833349898af895ea898)
+
+### 9.Ninth test
+I switched from *"nomic-embed-text"* to *"qwen3-embedding:0.6b"*, which gave better results. I also corrected the text, added a minimum similarity score to filter out unrelated information, and added an extra check to improve information selection. The test was successfu.
+
+[Commit 6d6e6c4](https://github.com/ezzyezn/Robot-NAO-V6/commit/6d6e6c472d1254bdb0d7db1a9e189152b55b520b),
+[Commit e475bb9](https://github.com/ezzyezn/Robot-NAO-V6/commit/e475bb91fdf0559a79de9d3f5489243a34898c3a),
+[Commit a547d59](https://github.com/ezzyezn/Robot-NAO-V6/commit/a547d59cfba5566b86b1b78a93e5a0067dff49b5).
+
+*If the "qwen3-embedding:0.6b" model is not installed, install it using this command in CMD:* `ollama pull qwen3-embedding:0.6b`
+
+### 10.Tenth test
+My project now looks much cleaner. The code is divided into several files, and each file has its own task. I updated the code comments, improved the LLM workflow, and added a large database with information about the school. However, there is now a major problem: the LLM takes a long time to answer. This happens because many lines of information must be converted into vectors one by one and then compared to find the best match. Also, the *"qwen3-embedding:0.6b"* model sometimes selects incorrect information because it considers it more similar to the question than the correct information. I will continue working on this problem. The test was not completely successful.
+
+[Commit 711ea0b](https://github.com/ezzyezn/Robot-NAO-V6/commit/711ea0bd0d92264d7ad52790f397043368802bb7),
+[Commit 412324e](https://github.com/ezzyezn/Robot-NAO-V6/commit/412324ed2f5758afcd2658f566e809166dc56519),
+[Commit 1ac820c](https://github.com/ezzyezn/Robot-NAO-V6/commit/1ac820cc7e3c62efaf8c2affeacda91defa579e5),
+[Commit e34e05b](https://github.com/ezzyezn/Robot-NAO-V6/commit/e34e05b98708fa4d52405da1136e6d431c5cd97c)
+
 #
 ### Latest changes:
-[Commit e475bb9](https://github.com/ezzyezn/Robot-NAO-V6/commit/e475bb91fdf0559a79de9d3f5489243a34898c3a)
+[Commit e34e05b](https://github.com/ezzyezn/Robot-NAO-V6/commit/e34e05b98708fa4d52405da1136e6d431c5cd97c)
