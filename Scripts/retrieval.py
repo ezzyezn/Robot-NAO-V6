@@ -20,7 +20,7 @@ def load_embeddings(filename):
     
 def find_best_chunk(question, chunks, embeddings):
     question_embedding = ollama.embed(
-        model="qwen3.embedding:0.6b",
+        model="qwen3-embedding:0.6b",
         input=question
     )["embeddings"][0]
     

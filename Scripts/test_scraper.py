@@ -1,6 +1,6 @@
 from scraper import load_cache, update_cache_from_irls, split_text
 import os
-from retrieval import create_embeddings, save_embeddings, load_embeddings
+from retrieval import create_embeddings, save_embeddings, load_embeddings, find_best_chunk
 
 cache_file = "Scripts/school_cache.txt"
 embeddings_file = "Scripts/embeddings.json"
@@ -32,6 +32,14 @@ else:
     embeddings = create_embeddings(chunks)
     save_embeddings(embeddings, embeddings_file)
     
-print("Chunks:", len(chunks))
-print("Embeddings: ", len(embeddings))
+question = input("Ask a question: ")
+
+best_chunk, best_similarity = find_best_chunk(question,
+                                              chunks,
+                                              embeddings)
+
+print("BEST CHUNK: ")
+print(best_chunk)
+
+print("BEST SIMILARITY: ",best_similarity)
 
