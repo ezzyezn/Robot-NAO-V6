@@ -102,15 +102,15 @@ I switched from *"nomic-embed-text"* to *"qwen3-embedding:0.6b"*, which gave bet
 ### 10.Tenth test
 My project now looks much cleaner. The code is divided into several files, and each file has its own task. I updated the code comments, improved the LLM workflow, and added a large database with information about the school. However, there is now a major problem: the LLM takes a long time to answer. This happens because many lines of information must be converted into vectors one by one and then compared to find the best match. Also, the *"qwen3-embedding:0.6b"* model sometimes selects incorrect information because it considers it more similar to the question than the correct information. I will continue working on this problem. The test was not completely successful.
 
-### 11.Eleventh test
-I removed the entire database that I created earlier and decided to use a different approach: searching for information on the school website. The test was partly successful. The code gets information from the website, but there is not enough information to answer the questions.
-
-[Commit bb65180](https://github.com/ezzyezn/Robot-NAO-V6/commit/bb65180d8df35b62a31b6456e85628e400c195ff)
-
 [Commit 711ea0b](https://github.com/ezzyezn/Robot-NAO-V6/commit/711ea0bd0d92264d7ad52790f397043368802bb7),
 [Commit 412324e](https://github.com/ezzyezn/Robot-NAO-V6/commit/412324ed2f5758afcd2658f566e809166dc56519),
 [Commit 1ac820c](https://github.com/ezzyezn/Robot-NAO-V6/commit/1ac820cc7e3c62efaf8c2affeacda91defa579e5),
 [Commit e34e05b](https://github.com/ezzyezn/Robot-NAO-V6/commit/e34e05b98708fa4d52405da1136e6d431c5cd97c)
+
+### 11.Eleventh test
+I removed the entire database that I created earlier and decided to use a different approach: searching for information on the school website. The test was partly successful. The code gets information from the website, but there is not enough information to answer the questions.
+
+[Commit bb65180](https://github.com/ezzyezn/Robot-NAO-V6/commit/bb65180d8df35b62a31b6456e85628e400c195ff)
 
 #
 ### Latest changes:
