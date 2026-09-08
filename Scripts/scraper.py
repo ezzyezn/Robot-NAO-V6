@@ -28,10 +28,14 @@ def load_cache(filename):
     with open(filename, "r", encoding="utf-8") as file:
         return file.read()
 
-def update_cache_from_irls(urls,filename):
+def update_cache_from_urls(urls,filename):
     all_text = ""
     for url in urls:
             html = download_page(url)
+            
+            if "kontakt" in url:
+                inspect_school_blocks(html)
+            
             text = extract_text(html)
             
             all_text += text + "\n\n"
@@ -47,3 +51,16 @@ def split_text(text,chunk_size=500):
         chunks.append(chunk)
         
     return chunks
+
+def inspect_school_blocks(html):
+    soup = BeautifulSoup(html, "html.parser")
+    
+    for tag in soup.find_all(string=True):
+        text = tag.strip()
+        
+        if text in ["TEB Liceum", "TEB Technikum", "TEB Liceum Plastyczne"]:
+            print("TEXT:", text)
+            print("TAG:", tag.parent.name)
+            print("CLASS:", tag.parent.get("class"))
+            print("ID:", tag.parent.get("id"))
+            print()

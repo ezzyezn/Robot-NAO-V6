@@ -1,4 +1,4 @@
-from scraper import load_cache, update_cache_from_irls, split_text
+from scraper import load_cache, update_cache_from_urls, split_text
 import os
 from retrieval import create_embeddings, save_embeddings, load_embeddings, find_best_chunk
 
@@ -18,7 +18,7 @@ else:
     
     print("Downloading page...")
     
-    update_cache_from_irls(urls, cache_file)
+    update_cache_from_urls(urls, cache_file)
     
     print("Page downloaded")
 
