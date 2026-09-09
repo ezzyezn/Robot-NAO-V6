@@ -1,8 +1,10 @@
-from scraper import create_document, split_documents
+from scraper import create_documents, split_documents, save_documents
 from retrieval import (
     create_embeddings,
     find_top_chunks
 )
+
+documents_file = "Scripts/documents.json"
 
 urls = [
     "https://szkolasrednia.teb.pl/miasta/d/gdansk/kontakt/",
@@ -11,7 +13,8 @@ urls = [
 
 
 print("Downloading documents...")
-documents = create_document(urls)
+documents = create_documents(urls)
+save_documents(documents, documents_file)
 chunks = split_documents(documents)
 
 

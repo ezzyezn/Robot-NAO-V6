@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import json
 
 
 def download_page(url):
@@ -11,8 +12,10 @@ def download_page(url):
 def extract_text(html):
     soup = BeautifulSoup(html, "html.parser")
     
+    
     for tag in soup(["script", "style"]):
         tag.decompose()
+        
         
     return soup.get_text(separator=" ", strip=True)
 
@@ -20,16 +23,21 @@ def extract_text(html):
 def extract_contact_sections(html):
     text = extract_text(html)
 
+
     liceum_location = text.find("Lokalizacja TEB Liceum ")
     technikum_location = text.find("Lokalizacja TEB Technikum ")
     plastyczne_location = text.find("Lokalizacja TEB Liceum Plastyczne")
     domowa_location = text.find("Lokalizacja TEB Edukacja Domowa")
 
+
     technikum = text[liceum_location:technikum_location]
+
 
     plastyczne = text[technikum_location:plastyczne_location]
 
+
     liceum = text[plastyczne_location:domowa_location]
+
 
     liceum = liceum.replace(
         "Lokalizacja TEB Liceum Plastyczne",
@@ -37,17 +45,20 @@ def extract_contact_sections(html):
         1
     )
 
+
     technikum = technikum.replace(
         "Lokalizacja TEB Liceum",
         "",
         1
     )
 
+
     plastyczne = plastyczne.replace(
         "Lokalizacja TEB Technikum",
         "",
         1
     )
+
 
     return liceum, technikum, plastyczne
 
@@ -67,10 +78,13 @@ def update_cache_from_urls(urls, filename):
     for url in urls:
         html = download_page(url)
             
+            
         if "kontakt" in url:
             liceum, technikum, plastyczne = extract_contact_sections(html)
+        
             
             all_text += "=== SOURCE: KONTAKT ===\n\n"
+                
                 
             all_text += "--- LICEUM ---\n" + liceum + "\n\n"
             all_text += "--- TECHNIKUM ---\n" + technikum + "\n\n"
@@ -78,8 +92,10 @@ def update_cache_from_urls(urls, filename):
         else:
             text = extract_text(html)
             
+            
             all_text += "=== SOURCE: NASZA SZKOLA ===\n\n"
             all_text += text + "\n\n"
+    
     
     save_text(all_text, filename)
     
@@ -138,7 +154,7 @@ def split_text(text, chunk_size=500, overlap=100):
     return chunks
 
 
-def create_document(urls):
+def create_documents(urls):
     documents = []
     
     
@@ -190,11 +206,14 @@ def split_documents(documents, chunk_size=500, overlap=100):
     seen = set()
     step = chunk_size - overlap
 
+
     for document in documents:
         text = document["text"].strip()
 
+
         for i in range(0, len(text), step):
             chunk_text = text[i:i + chunk_size].strip()
+
 
             if not chunk_text:
                 continue
@@ -205,10 +224,13 @@ def split_documents(documents, chunk_size=500, overlap=100):
                 chunk_text
             )
 
+
             if key in seen:
                 continue
 
+
             seen.add(key)
+
 
             chunks.append({
                 "source": document["source"],
@@ -216,4 +238,10 @@ def split_documents(documents, chunk_size=500, overlap=100):
                 "text": chunk_text
             })
 
+
     return chunks
+
+
+def save_documents(documents, filename):
+    with open(filename, "w", encoding="utf-8") as file:
+        json.dump(documents, file, ensure_ascii=False, indent=4)
