@@ -4,11 +4,22 @@ from similarity import cosine_similarity
 
 
 def create_embeddings(chunks):
+    texts = []
+
+    for chunk in chunks:
+        text = (
+            f"Source: {chunk['source']}\n"
+            f"Section: {chunk['section']}\n"
+            f"{chunk['text']}"
+        )
+
+        texts.append(text)
+
     response = ollama.embed(
         model="qwen3-embedding:0.6b",
-        input=chunks
+        input=texts
     )
-    
+
     return response["embeddings"]
 
 

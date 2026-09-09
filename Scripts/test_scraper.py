@@ -1,18 +1,8 @@
-import os
-
-from scraper import load_cache, update_cache_from_urls, split_text
+from scraper import create_document, split_documents
 from retrieval import (
     create_embeddings,
-    save_embeddings,
-    load_embeddings,
-    find_best_chunk,
     find_top_chunks
 )
-
-
-cache_file = "Scripts/school_cache.txt"
-embeddings_file = "Scripts/embeddings.json"
-
 
 urls = [
     "https://szkolasrednia.teb.pl/miasta/d/gdansk/kontakt/",
@@ -20,29 +10,18 @@ urls = [
     ]
 
 
-update = input("Update cache? (y/n): ")
+print("Downloading documents...")
+documents = create_document(urls)
+chunks = split_documents(documents)
 
 
-if os.path.exists(cache_file) and update != "y":
-    print("Cache already exists")
-else:  
-    print("Downloading page...")
-    update_cache_from_urls(urls, cache_file)
-    print("Page downloaded")
+print("Documents:", len(documents))
+print("Chunks:", len(chunks))
 
 
-all_text = load_cache(cache_file)
+print("Creating embedings...")
+embeddings = create_embeddings(chunks)
 
-
-chunks = split_text(all_text)
-
-
-if os.path.exists(embeddings_file) and update != "y":
-    embeddings = load_embeddings(embeddings_file)
-else:
-    embeddings = create_embeddings(chunks)
-    save_embeddings(embeddings, embeddings_file)
-    
 
 question = input("Ask a question: ")
 
@@ -53,12 +32,9 @@ top_chunks = find_top_chunks(
     embeddings
 )
 
-
 for i, (chunk, similarity) in enumerate(top_chunks, start=1):
     print(f"\nTOP {i}:")
-    print(chunk)
+    print("SOURCE:", chunk["source"])
+    print("SECTION:", chunk["section"])
+    print("TEXT:", chunk["text"])
     print("SIMILARITY:", similarity)
-
-
-print("BEST CHUNK: ")
-print(top_chunks)

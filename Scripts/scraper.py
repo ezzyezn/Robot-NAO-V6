@@ -80,8 +80,6 @@ def update_cache_from_urls(urls, filename):
             
             all_text += "=== SOURCE: NASZA SZKOLA ===\n\n"
             all_text += text + "\n\n"
-                
-            all_text += text + "\n\n"
     
     save_text(all_text, filename)
     
@@ -134,7 +132,88 @@ def split_text(text, chunk_size=500, overlap=100):
             chunk_text += chunk
             
             
-            chunks.append(chunk)
+            chunks.append(chunk_text)
     
         
+    return chunks
+
+
+def create_document(urls):
+    documents = []
+    
+    
+    for url in urls:
+        html = download_page(url)
+
+
+        if "kontakt" in url:
+            liceum, technikum, plastyczne = extract_contact_sections(html)
+
+
+            documents.append({
+                "source": "kontakt",
+                "section": "liceum",
+                "text": liceum
+            })
+            
+
+            documents.append({
+                "source": "kontakt",
+                "section": "technikum",
+                "text": technikum
+            })
+
+
+            documents.append({
+                "source": "kontakt",
+                "section": "liceum_plastyczne",
+                "text": plastyczne
+            })
+
+
+        elif "nasza-szkola" in url:
+            text = extract_text(html)
+
+
+            documents.append({
+                "source": "nasza-szkola",
+                "section": "general",
+                "text": text
+            })
+
+
+    return documents
+
+
+def split_documents(documents, chunk_size=500, overlap=100):
+    chunks = []
+    seen = set()
+    step = chunk_size - overlap
+
+    for document in documents:
+        text = document["text"].strip()
+
+        for i in range(0, len(text), step):
+            chunk_text = text[i:i + chunk_size].strip()
+
+            if not chunk_text:
+                continue
+
+            key = (
+                document["source"],
+                document["section"],
+                chunk_text
+            )
+
+            if key in seen:
+                continue
+
+            seen.add(key)
+
+            chunks.append({
+                "source": document["source"],
+                "section": document["section"],
+                "text": chunk_text
+            })
+
     return chunks
