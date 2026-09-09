@@ -1,10 +1,23 @@
-from scraper import create_documents, split_documents, save_documents
+import os
+
+from scraper import (
+    create_documents,
+    split_documents,
+    save_documents,
+    load_documents
+    )
+
 from retrieval import (
     create_embeddings,
-    find_top_chunks
+    find_top_chunks,
+    save_embeddings
 )
 
 documents_file = "Scripts/documents.json"
+embeddings_file = "Scripts/embeddings.json"
+
+update = input("Update documents? (y/n): ").strip().lower()
+
 
 urls = [
     "https://szkolasrednia.teb.pl/miasta/d/gdansk/kontakt/",
@@ -12,9 +25,15 @@ urls = [
     ]
 
 
-print("Downloading documents...")
-documents = create_documents(urls)
-save_documents(documents, documents_file)
+if os.path.exists(documents_file) and update != "y":
+    print("Loading documents fro cache...")
+    documents = load_documents(documents_file)
+else:
+    print("Downloading documents...")
+    documents = create_documents(urls)
+    save_documents(documents, documents_file)
+
+
 chunks = split_documents(documents)
 
 
@@ -24,7 +43,7 @@ print("Chunks:", len(chunks))
 
 print("Creating embedings...")
 embeddings = create_embeddings(chunks)
-
+save_embeddings(embeddings, embeddings_file)
 
 question = input("Ask a question: ")
 

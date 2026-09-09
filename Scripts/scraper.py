@@ -245,3 +245,8 @@ def split_documents(documents, chunk_size=500, overlap=100):
 def save_documents(documents, filename):
     with open(filename, "w", encoding="utf-8") as file:
         json.dump(documents, file, ensure_ascii=False, indent=4)
+        
+
+def load_documents(filename):
+    with open(filename, "r", encoding="utf8") as file:
+        return json.load(file)
