@@ -9,7 +9,7 @@ from retrieval import (
     load_embeddings,
 )
 
-from llm import generate_answer, check_relevance
+from llm import generate_answer
 
 
 documents_file = "Scripts/documents.json"
@@ -61,36 +61,34 @@ if embeddings is None:
     save_embeddings(chunks, embeddings, embeddings_file)
 
 
-question = input("Ask a question: ")
+print("\nCześć! Jestem Tebit")
+print("Możesz zadawać pytania o szkołę.")
 
+while True:
+    question = input("\nTy: ").strip()
+    
+    if question.lower() == "exit":
+        break
 
-top_chunks = find_top_chunks(question, chunks, embeddings, top_k=5)
-
-for i, (chunk, similarity) in enumerate(top_chunks, start=1):
-    print(f"\nTOP {i}:")
-    print("SOURCE:", chunk["source"])
-    print("SECTION:", chunk["section"])
-    print("TEXT:", chunk["text"])
-    print("SIMILARITY:", similarity)
-
-
-context_parts = []
-
-for chunk, similarity in top_chunks:
-    part = (
-        f"Source: {chunk['source']}\n"
-        f"Section: {chunk['section']}\n"
-        f"Text: {chunk['text']}"
-    )
-
-    context_parts.append(part)
-
-context = "\n\n".join(context_parts)
-print("\nChecking relevance...")
-is_relevant = check_relevance(question, context)
-print("Context contains an answer:", is_relevant)
-print("\nGenerating answer...")
-answer = generate_answer(question, context)
-
-print("\nAnswer:")
-print(answer)
+    if not question:
+        continue
+    
+    
+    top_chunks = find_top_chunks(question, chunks, embeddings, top_k=5)
+    
+    context_parts = []
+    
+    for chunk, similarity in top_chunks:
+        part = (
+            f"Source: {chunk['source']}\n"
+            f"Section: {chunk['section']}\n"
+            f"Text: {chunk['text']}"
+        )
+        context_parts.append(part)
+        
+    context = "\n\n".join(context_parts)
+    
+    print("\nTebit myśli...")
+    answer = generate_answer(question, context)
+    
+    print("Tebit:", answer)
