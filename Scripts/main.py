@@ -1,17 +1,12 @@
 import os
 
-from scraper import (
-    create_documents,
-    split_documents,
-    save_documents,
-    load_documents
-    )
+from scraper import create_documents, split_documents, save_documents, load_documents
 
 from retrieval import (
     create_embeddings,
     find_top_chunks,
     save_embeddings,
-    load_embeddings
+    load_embeddings,
 )
 
 documents_file = "Scripts/documents.json"
@@ -22,8 +17,8 @@ update = input("Update documents? (y/n): ").strip().lower()
 
 urls = [
     "https://szkolasrednia.teb.pl/miasta/d/gdansk/kontakt/",
-    "https://szkolasrednia.teb.pl/miasta/d/gdansk/nasza-szkola/"
-    ]
+    "https://szkolasrednia.teb.pl/miasta/d/gdansk/nasza-szkola/",
+]
 
 
 if os.path.exists(documents_file) and update != "y":
@@ -47,7 +42,7 @@ embeddings = None
 
 if os.path.exists(embeddings_file):
     cached_data = load_embeddings(embeddings_file)
-    
+
     if (
         isinstance(cached_data, dict)
         and cached_data.get("model") == "qwen3-embedding:0.6b"
@@ -56,7 +51,7 @@ if os.path.exists(embeddings_file):
     ):
         print("Loading embeddings from cache...")
         embeddings = cached_data["embeddings"]
-    
+
 if embeddings is None:
     print("Creating embeddings...")
     embeddings = create_embeddings(chunks)
@@ -66,11 +61,7 @@ if embeddings is None:
 question = input("Ask a question: ")
 
 
-top_chunks = find_top_chunks(
-    question,
-    chunks,
-    embeddings
-)
+top_chunks = find_top_chunks(question, chunks, embeddings)
 
 for i, (chunk, similarity) in enumerate(top_chunks, start=1):
     print(f"\nTOP {i}:")
@@ -78,3 +69,17 @@ for i, (chunk, similarity) in enumerate(top_chunks, start=1):
     print("SECTION:", chunk["section"])
     print("TEXT:", chunk["text"])
     print("SIMILARITY:", similarity)
+
+
+context_parts = []
+
+for chunk, similarity in top_chunks:
+    part = (
+        f"Source: {chunk['source']}\n"
+        f"Section: {chunk['section']}\n"
+        f"Text: {chunk['text']}"
+    )
+
+    context_parts.append(part)
+
+context = "\n\n".join(context_parts)
