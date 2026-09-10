@@ -10,7 +10,8 @@ from scraper import (
 from retrieval import (
     create_embeddings,
     find_top_chunks,
-    save_embeddings
+    save_embeddings,
+    load_embeddings
 )
 
 documents_file = "Scripts/documents.json"
@@ -41,9 +42,26 @@ print("Documents:", len(documents))
 print("Chunks:", len(chunks))
 
 
-print("Creating embedings...")
-embeddings = create_embeddings(chunks)
-save_embeddings(embeddings, embeddings_file)
+embeddings = None
+
+
+if os.path.exists(embeddings_file):
+    cached_data = load_embeddings(embeddings_file)
+    
+    if (
+        isinstance(cached_data, dict)
+        and cached_data.get("model") == "qwen3-embedding:0.6b"
+        and cached_data.get("chunks") == chunks
+        and len(cached_data.get("embeddings", [])) == len(chunks)
+    ):
+        print("Loading embeddings from cache...")
+        embeddings = cached_data["embeddings"]
+    
+if embeddings is None:
+    print("Creating embeddings...")
+    embeddings = create_embeddings(chunks)
+    save_embeddings(chunks, embeddings, embeddings_file)
+
 
 question = input("Ask a question: ")
 

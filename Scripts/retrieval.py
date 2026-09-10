@@ -23,9 +23,15 @@ def create_embeddings(chunks):
     return response["embeddings"]
 
 
-def save_embeddings(embeddings, filename):
+def save_embeddings(chunks, embeddings, filename):
+    data = {
+        "model": "qwen3-embedding:0.6b",
+        "chunks": chunks,
+        "embeddings": embeddings
+    }
+    
     with open(filename, "w", encoding="utf-8") as file:
-        json.dump(embeddings, file)
+        json.dump(data, file, ensure_ascii=False, indent=4)
 
 
 def load_embeddings(filename):
