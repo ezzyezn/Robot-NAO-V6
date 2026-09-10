@@ -64,7 +64,7 @@ if embeddings is None:
 question = input("Ask a question: ")
 
 
-top_chunks = find_top_chunks(question, chunks, embeddings)
+top_chunks = find_top_chunks(question, chunks, embeddings, top_k=5)
 
 for i, (chunk, similarity) in enumerate(top_chunks, start=1):
     print(f"\nTOP {i}:")

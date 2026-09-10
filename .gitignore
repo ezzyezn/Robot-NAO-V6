@@ -6,5 +6,8 @@ __pycache__/
 venv/
 .venv/
 
+# Local experiments and audit results
+/work/
+
 Scripts/school_cache.txt
 Scripts/embeddings.json

@@ -87,6 +87,9 @@ def generate_answer(question, info):
             },
             {"role": "user", "content": user_message},
         ],
+        options={
+            "temperature": 0
+        }
     )
 
     # Return the generated answer
