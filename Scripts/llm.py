@@ -40,6 +40,7 @@ def check_relevance(question, info):
 
     # Get the models answer
     answer = response["message"]["content"]
+    print("Revelance raw answer:", repr(answer))
 
     # Retunrn True only if the model answered "TAK"
     return answer.strip().upper() == "TAK"

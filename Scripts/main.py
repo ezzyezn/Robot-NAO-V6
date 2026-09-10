@@ -9,7 +9,7 @@ from retrieval import (
     load_embeddings,
 )
 
-from llm import generate_answer
+from llm import generate_answer, check_relevance
 
 
 documents_file = "Scripts/documents.json"
@@ -86,6 +86,9 @@ for chunk, similarity in top_chunks:
     context_parts.append(part)
 
 context = "\n\n".join(context_parts)
+print("\nChecking relevance...")
+is_relevant = check_relevance(question, context)
+print("Context contains an answer:", is_relevant)
 print("\nGenerating answer...")
 answer = generate_answer(question, context)
 
