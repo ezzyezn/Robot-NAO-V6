@@ -9,6 +9,9 @@ from retrieval import (
     load_embeddings,
 )
 
+from llm import generate_answer
+
+
 documents_file = "Scripts/documents.json"
 embeddings_file = "Scripts/embeddings.json"
 
@@ -83,3 +86,8 @@ for chunk, similarity in top_chunks:
     context_parts.append(part)
 
 context = "\n\n".join(context_parts)
+print("\nGenerating answer...")
+answer = generate_answer(question, context)
+
+print("\nAnswer:")
+print(answer)
