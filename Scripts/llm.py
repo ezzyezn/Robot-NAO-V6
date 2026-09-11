@@ -103,6 +103,17 @@ def generate_answer(question, info):
             "temperature": 0
         }
     )
-
+    print(
+        f"Загрузка модели: "
+        f"{response['load_duration'] / 1_000_000_000:.2f} с"
+    )
+    print(
+        f"Обработка текста: "
+        f"{response['prompt_eval_duration'] / 1_000_000_000:.2f} с"
+    )
+    print(
+        f"Генерация ответа: "
+        f"{response['eval_duration'] / 1_000_000_000:.2f} с"
+    )
     # Return the generated answer
     return response["message"]["content"]

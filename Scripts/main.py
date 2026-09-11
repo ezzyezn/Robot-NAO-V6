@@ -9,6 +9,8 @@ from retrieval import (
     load_embeddings,
 )
 
+from time import perf_counter
+
 from llm import generate_answer
 
 
@@ -73,8 +75,11 @@ while True:
     if not question:
         continue
     
+    search_start = perf_counter()
     
     top_chunks = find_top_chunks(question, chunks, embeddings, top_k=5)
+    
+    print(f"Поиск: {perf_counter() - search_start:.2f} с")
     
     context_parts = []
     
@@ -89,6 +94,9 @@ while True:
     context = "\n\n".join(context_parts)
     
     print("\nTebit myśli...")
+    answer_start = perf_counter()
+
     answer = generate_answer(question, context)
-    
+
+    print(f"Ответ модели: {perf_counter() - answer_start:.2f} с")
     print("Tebit:", answer)
