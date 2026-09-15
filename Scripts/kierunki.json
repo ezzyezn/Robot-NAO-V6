@@ -1,0 +1,840 @@
+[
+  {
+    "name": "Animacja 3D",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty do wglądu",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Akademia sprzedaży z wykorzystaniem sztucznej inteligencji",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty do wglądu",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Asystentka stomatologiczna z elementami implantologii",
+    "variants": [
+      {
+        "study_mode": "Stacjonarna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Asystent osoby niepełnosprawnej",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Animator rynku książki",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Barber",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Charakteryzacja",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Dekorowanie wnętrz i home staging",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Dietetyka i zaburzenia odżywiania",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Dogoterapeuta",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Doula - asystentka rodzącej",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Florystyka i kompozycje kwiatowe",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Fashion Design - podstawy projektowania ubioru",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Finanse i rachunkowość z certyfikatem InsERT",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Fotografia z certyfikatem CANON",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Grafika komputerowa",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Groomer - pielęgnacja i strzyżenie zwierząt",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Holistyczna opieka nad zwierzętami",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Higienistka stomatologiczna",
+    "variants": [
+      {
+        "study_mode": "Stacjonarna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Instruktor fitness",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Język angielski - poziom podstawowy",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Język angielski - poziom średnio zaawansowany",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Język niemiecki - poziom podstawowy",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Język niemiecki - poziom średnio zaawansowany",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Język polski dla obcokrajowców - poziom podstawowy",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Język polski dla obcokrajowców - poziom średnio zaawansowany",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Kosmetyka estetyczna",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Kurs survivalowo-strzelecki",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Makijaż permanentny",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Marketing internetowy ONLINE",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Ochrona danych osobowych",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Opiekunka dziecięca z masażem Shantala",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Opiekun medyczny",
+    "variants": [
+      {
+        "study_mode": "Stacjonarna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Opiekun osoby starszej",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Opiekun w domu pomocy społecznej",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Opiekun w żłobku lub klubie dziecięcym",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Organizator imprez ślubnych i konferencyjnych",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Ortoptystka - rehabilitacja wzroku",
+    "variants": [
+      {
+        "study_mode": "Dzienna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "5 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Podolog",
+    "variants": [
+      {
+        "study_mode": "Stacjonarna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Podologia z ortonyksją",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Pomoc nauczyciela przedszkola",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Pośrednictwo nieruchomości w praktyce",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Produkcja filmowa i telewizyjna",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Produkcja video",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Programowanie aplikacji internetowych i mobilnych",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Programowanie Java",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Programowanie Python z Cisco Networking Academy",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Projektowanie ogrodów",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Protetyk słuchu",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Refleksologia",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Rejestratorka/Sekretarka medyczna",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Specjalista ds. e-commerce - patronat SALESmanago",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Specjalista ds. mediów społecznościowych",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Stylizacja i pielęgnacja oprawy oczu",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Stylizacja paznokci z certyfikatem Semilac",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Szkolenie i behawiorystyka zwierząt",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Sztuczna inteligencja w marketingu ONLINE",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Tatuażysta",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Technik administracji - zarządzanie biurem",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Technik BHP",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Technik dentystyczny z technologią CAD/CAM",
+    "variants": [
+      {
+        "study_mode": "Dzienna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "5 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Technik elektroniki i informatyki medycznej",
+    "variants": [
+      {
+        "study_mode": "Stacjonarna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Technik elektroradiolog",
+    "variants": [
+      {
+        "study_mode": "Dzienna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "5 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Technik farmaceutyczny",
+    "variants": [
+      {
+        "study_mode": "Dzienna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "5 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Technik masażysta z elementami fizjoterapii",
+    "variants": [
+      {
+        "study_mode": "Stacjonarna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Technik optyki okularowej",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Technik ortopeda",
+    "variants": [
+      {
+        "study_mode": "Stacjonarna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Technik realizacji nagrań",
+    "variants": [
+      {
+        "study_mode": "Stacjonarna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "3 razy w tygodniu, co tydzień"
+      },
+      {
+        "study_mode": "Zaoczna"
+      }
+    ]
+  },
+  {
+    "name": "Technik sterylizacji medycznej",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Technik usług kosmetycznych z certyfikatem Bielenda Professional",
+    "variants": [
+      {
+        "study_mode": "Stacjonarna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "3 razy w tygodniu, co tydzień"
+      },
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "Sobota i niedziela, co drugi tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Terapeuta zajęciowy z elementami dogoterapii/florystyki",
+    "variants": [
+      {
+        "study_mode": "Stacjonarna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Terapia tkanek miękkich",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Trener personalny",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Trychologia",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Warsztaty farmaceutyczne z elementami ziołolecznictwa",
+    "variants": [
+      {
+        "study_mode": "Dzienna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "2–3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Warsztaty informatyczno-medyczne",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "2–3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Warsztaty komputerowe",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "2–3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Warsztaty masażu",
+    "variants": [
+      {
+        "study_mode": "Stacjonarna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "2–3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Warsztaty opiekuńczo - medyczne",
+    "variants": [
+      {
+        "study_mode": "Stacjonarna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "2–3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Warsztaty terapii manualnej",
+    "variants": [
+      {
+        "study_mode": "Stacjonarna",
+        "required_documents": "Dowód osobisty i świadectwo szkoły średniej",
+        "schedule": "2–3 razy w tygodniu, co tydzień"
+      }
+    ]
+  },
+  {
+    "name": "Wizaż i stylizacja",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Ziołolecznictwo",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  },
+  {
+    "name": "Zoofizjoterapeuta zwierząt towarzyszących",
+    "variants": [
+      {
+        "study_mode": "Zaoczna",
+        "required_documents": "Dowód osobisty",
+        "schedule": "1 lub 2 weekendy w miesiącu, 2 semestry"
+      }
+    ]
+  }
+]
