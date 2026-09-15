@@ -74,13 +74,27 @@ def create_documents(urls):
     return documents
 
 
-def split_documents(documents, chunk_size=500, overlap=100):
+def clean_document_text(document):
+    text = " ".join(document["text"].split())
+
+    if document["source"] == "kontakt":
+        text = text.split(
+            "Masz pytanie? Wypełnij formularz!", 1
+        )[0]
+
+    elif document["source"] == "nasza-szkola":
+        text = text.split("Zarządzaj zgodą", 1)[0]
+
+    return text.strip()
+
+
+def split_documents(documents, chunk_size=300, overlap=50):
     chunks = []
     seen = set()
     step = chunk_size - overlap
 
     for document in documents:
-        text = document["text"].strip()
+        text = clean_document_text(document)
 
         for i in range(0, len(text), step):
             chunk_text = text[i : i + chunk_size].strip()

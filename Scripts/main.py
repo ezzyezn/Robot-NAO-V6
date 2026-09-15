@@ -74,10 +74,10 @@ while True:
 
     if not question:
         continue
-    
+
     search_start = perf_counter()
-    
-    top_chunks = find_top_chunks(question, chunks, embeddings, top_k=5)
+
+    top_chunks = find_top_chunks(question, chunks, embeddings, top_k=3)
     
     print(f"Поиск: {perf_counter() - search_start:.2f} с")
     

@@ -1,3 +1,7 @@
+import os
+
+os.environ.setdefault("OLLAMA_HOST", "http://127.0.0.1:11434")
+
 import ollama
 import json
 from similarity import cosine_similarity

@@ -1,3 +1,7 @@
+import os
+
+os.environ.setdefault("OLLAMA_HOST", "http://127.0.0.1:11434")
+
 import ollama
 
 
@@ -5,57 +9,31 @@ import ollama
 def generate_answer(question, info):
 
     # Create a message with the found information and the users question
-    user_message = f"""
-
-        Informacje o szkole: {info}
-
-        Pytanie użytkownika: {question}
-
-        """
+    user_message = (
+        f"Dane szkoły:\n{info}\n\n"
+        f"Pytanie: {question}"
+    )
     response = ollama.chat(
         model="qwen3:4b-instruct-2507-q4_K_M",
         messages=[
             {
                 "role": "system",
-                "content": """
-                            Masz na imię Tebit. Jesteś przyjaznym robotem.
-                            Rozmawiaj naturalnie po polsku i odpowiadaj krótko,
-                            zwykle w 1–3 zdaniach.
-
-                            Odpowiadaj swobodnie na powitania, pożegnania,
-                            podziękowania oraz proste pytania, takie jak
-                            „Jak się nazywasz?” i „Jak się masz?”.
-
-                            Na pytania o szkołę odpowiadaj na podstawie przekazanych
-                            informacji. Nie wymyślaj brakujących faktów.
-                            Jeśli nie znasz odpowiedzi, powiedz to krótko i uprzejmie.
-
-                            Section oznacza szkołę: liceum, technikum lub liceum_plastyczne.
-                            Nie mieszaj ich danych. Jeśli pytanie jest niejasne,
-                            poproś o doprecyzowanie.
-                            
-                            Rozmowa towarzyska obejmuje powitania, pożegnania,
-                            podziękowania i krótkie pytania o ciebie.
-                            Nie obejmuje pytań o znane osoby, politykę ani wiedzę ogólną.
-
-                            Na takie pytania nie podawaj odpowiedzi rzeczowej.
-                            Zamiast tego zaproponuj rozmowę o szkole lub kierunkach.
-
-                            Przykłady naturalnych odpowiedzi:
-                            Użytkownik: Jak się nazywasz?
-                            Tebit: Mam na imię Tebit!
-
-                            Użytkownik: Jak się masz?
-                            Tebit: Dobrze, dzięki! A ty?
-
-                            Użytkownik: Opowiedz o historii starożytnego Rzymu.
-                            Tebit: Może porozmawiamy o naszej szkole? Co cię interesuje?
-                        """,
+                "content": (
+                    "Jesteś Tebit, przyjazny robot. "
+                    "Mów po polsku, krótko: 1–2 zdania, bez emoji. "
+                    "Odpowiadaj na powitania i proste pytania o siebie. "
+                    "Fakty o szkole podawaj wyłącznie z danych, "
+                    "zgodnie z oznaczeniem szkoły. "
+                    "Gdy brak odpowiedzi na dokładne pytanie, "
+                    "odpowiedz: Nie mam tej informacji. "
+                    "Na inne tematy uprzejmie zaproponuj rozmowę o szkole."
+                ),
             },
             {"role": "user", "content": user_message},
         ],
         options={
-            "temperature": 0
+            "temperature": 0,
+            "num_predict": 60,
         }
     )
     print(
