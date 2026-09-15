@@ -32,23 +32,6 @@ def load_embeddings(filename):
         return json.load(file)
 
 
-def find_best_chunk(question, chunks, embeddings):
-    question_embedding = ollama.embed(model="qwen3-embedding:0.6b", input=question)[
-        "embeddings"
-    ][0]
-
-    best_chunk = ""
-    best_similarity = 0
-
-    for chunk, chunk_embedding in zip(chunks, embeddings):
-        similarity = cosine_similarity(question_embedding, chunk_embedding)
-        if similarity > best_similarity:
-            best_similarity = similarity
-            best_chunk = chunk
-
-    return best_chunk, best_similarity
-
-
 def find_top_chunks(question, chunks, embeddings, top_k=3):
     question_embedding = ollama.embed(model="qwen3-embedding:0.6b", input=question)[
         "embeddings"
