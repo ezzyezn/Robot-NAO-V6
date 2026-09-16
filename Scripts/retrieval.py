@@ -36,7 +36,7 @@ def load_embeddings(filename):
         return json.load(file)
 
 
-def find_top_chunks(question, chunks, embeddings, top_k=3):
+def find_top_chunks(question, chunks, embeddings, top_k=3, source=None):
     question_embedding = ollama.embed(model="qwen3-embedding:0.6b", input=question)[
         "embeddings"
     ][0]
@@ -44,6 +44,9 @@ def find_top_chunks(question, chunks, embeddings, top_k=3):
     results = []
 
     for chunk, chunk_embedding in zip(chunks, embeddings):
+        if source is not None and chunk["source"] != source:
+            continue
+        
         similarity = cosine_similarity(question_embedding, chunk_embedding)
 
         results.append((chunk, similarity))

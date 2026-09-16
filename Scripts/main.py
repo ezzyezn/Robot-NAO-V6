@@ -37,7 +37,31 @@ else:
 
 chunks = split_documents(documents)
 
+courses = load_documents("Scripts/kierunki.json")
 
+for course in courses:
+    for variant in course["variants"]:
+        text = (
+            f"Kierunek: {course['name']}\n"
+            f"Forma nauki: {variant['study_mode']}\n"
+            f"Dokumenty do zapisu: "
+            f"{variant.get('required_documents', 'Brak informacji')}\n"
+            f"Zajęcia: {variant.get('schedule', 'Brak informacji')}\n"
+            f"Cena: brak informacji."
+        )
+
+        chunks.append(
+            {
+                "source": "kierunki.json",
+                "section": "kierunki",
+                "text": text,
+            }
+        )
+
+
+print("Kierunki:", len(courses))     
+        
+        
 print("Documents:", len(documents))
 print("Chunks:", len(chunks))
 
@@ -77,7 +101,28 @@ while True:
 
     search_start = perf_counter()
 
-    top_chunks = find_top_chunks(question, chunks, embeddings, top_k=3)
+    question_lower = question.casefold()
+
+    course_question = (
+        any(
+            word in question_lower
+            for word in ("kierunk", "kurs", "programowan")
+        )
+        or any(
+            course["name"].casefold() in question_lower
+            for course in courses
+        )
+    )
+
+    source = "kierunki.json" if course_question else None
+
+    top_chunks = find_top_chunks(
+        question,
+        chunks,
+        embeddings,
+        top_k=3,
+        source=source,
+    )
     
     print(f"Поиск: {perf_counter() - search_start:.2f} с")
     
@@ -92,6 +137,11 @@ while True:
         context_parts.append(part)
         
     context = "\n\n".join(context_parts)
+    
+    print("\n--- Kontekst dla modelu ---")
+    print(context)
+    print("Liczba znaków:", len(context))
+    print("--- Koniec kontekstu ---\n")
     
     print("\nTebit myśli...")
     answer_start = perf_counter()
