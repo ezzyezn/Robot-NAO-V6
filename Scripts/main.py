@@ -13,6 +13,8 @@ from time import perf_counter
 
 from llm import generate_answer
 
+from threading import Thread
+from nao_bridge import answers, run_server
 
 documents_file = "Scripts/documents.json"
 embeddings_file = "Scripts/embeddings.json"
@@ -86,7 +88,7 @@ if embeddings is None:
     embeddings = create_embeddings(chunks)
     save_embeddings(chunks, embeddings, embeddings_file)
 
-
+Thread(target=run_server, daemon=True).start()
 print("\nCześć! Jestem Tebit")
 print("Możesz zadawać pytania o szkołę.")
 
@@ -103,26 +105,37 @@ while True:
 
     question_lower = question.casefold()
 
-    course_question = (
-        any(
+    matched_names = [
+        course["name"]
+        for course in courses
+        if course["name"].casefold() in question_lower
+    ]
+
+    if matched_names:
+        top_chunks = [
+            (chunk, None)
+            for chunk in chunks
+            if chunk["source"] == "kierunki.json"
+            and any(
+                chunk["text"].startswith(f"Kierunek: {name}\n")
+                for name in matched_names
+            )
+        ]
+    else:
+        course_question = any(
             word in question_lower
             for word in ("kierunk", "kurs", "programowan")
         )
-        or any(
-            course["name"].casefold() in question_lower
-            for course in courses
+
+        source = "kierunki.json" if course_question else None
+
+        top_chunks = find_top_chunks(
+            question,
+            chunks,
+            embeddings,
+            top_k=3,
+            source=source,
         )
-    )
-
-    source = "kierunki.json" if course_question else None
-
-    top_chunks = find_top_chunks(
-        question,
-        chunks,
-        embeddings,
-        top_k=3,
-        source=source,
-    )
     
     print(f"Поиск: {perf_counter() - search_start:.2f} с")
     
@@ -138,11 +151,6 @@ while True:
         
     context = "\n\n".join(context_parts)
     
-    print("\n--- Kontekst dla modelu ---")
-    print(context)
-    print("Liczba znaków:", len(context))
-    print("--- Koniec kontekstu ---\n")
-    
     print("\nTebit myśli...")
     answer_start = perf_counter()
 
@@ -150,3 +158,4 @@ while True:
 
     print(f"Ответ модели: {perf_counter() - answer_start:.2f} с")
     print("Tebit:", answer)
+    answers.put(answer)

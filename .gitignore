@@ -8,6 +8,7 @@ venv/
 
 # Local experiments and audit results
 /work/
+/NAO/
 
 Scripts/school_cache.txt
 Scripts/embeddings.json
