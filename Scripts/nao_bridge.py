@@ -1,8 +1,11 @@
 from queue import Queue, Empty
 import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 
 answers = Queue()
+
+UPLOAD_PATH = Path("work/question.wav")
 
 def get_next_answer():
     try:
@@ -32,6 +35,20 @@ class RobotHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(data)
     
+    def do_POST(self):
+        if self.path != "/upload":
+            self.send_error(404)
+            return
+        
+        length = int(self.headers.get("Content-Length", "0"))
+        audio_data = self.rfile.read(length)
+        UPLOAD_PATH.parent.mkdir(exist_ok=True)
+        UPLOAD_PATH.write_bytes(audio_data)
+        
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"ok")
+
 def run_server():
     server = ThreadingHTTPServer(
         ("0.0.0.0", port),
