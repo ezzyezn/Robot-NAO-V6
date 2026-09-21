@@ -89,6 +89,7 @@ if embeddings is None:
     save_embeddings(chunks, embeddings, embeddings_file)
 
 Thread(target=run_server, daemon=True).start()
+
 print("\nCześć! Jestem Tebit")
 print("Możesz zadawać pytania o szkołę.")
 

@@ -3,12 +3,14 @@ __pycache__/
 *.pyo
 *.pyd
 
+/NAO/
+
 venv/
 .venv/
 
 # Local experiments and audit results
 /work/
-/NAO/
+learn.py
 
 Scripts/school_cache.txt
 Scripts/embeddings.json
