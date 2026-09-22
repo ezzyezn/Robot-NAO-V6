@@ -13,11 +13,14 @@ from time import perf_counter
 
 from llm import generate_answer
 
+from speech_to_text import transcribe_audio
+
 from threading import Thread
 from nao_bridge import answers, run_server
 
 documents_file = "Scripts/documents.json"
 embeddings_file = "Scripts/embeddings.json"
+audio_path = "work/question.wav"
 
 update = input("Update documents? (y/n): ").strip().lower()
 
@@ -99,6 +102,10 @@ while True:
     if question.lower() == "exit":
         break
 
+    if question.lower() == "audio":
+        question = transcribe_audio(audio_path)
+        print("Rozpoznany tekst:",question)
+
     if not question:
         continue
 
@@ -138,7 +145,7 @@ while True:
             source=source,
         )
     
-    print(f"Поиск: {perf_counter() - search_start:.2f} с")
+    print(f"Poszukiwanie: {perf_counter() - search_start:.2f} с")
     
     context_parts = []
     
@@ -157,6 +164,6 @@ while True:
 
     answer = generate_answer(question, context)
 
-    print(f"Ответ модели: {perf_counter() - answer_start:.2f} с")
+    print(f"Odpowiedź: {perf_counter() - answer_start:.2f} с")
     print("Tebit:", answer)
     answers.put(answer)

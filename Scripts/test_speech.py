@@ -1,20 +1,7 @@
-from faster_whisper import WhisperModel
+from speech_to_text import transcribe_audio
 
 audio_path = "work/question.wav"
 
-model = WhisperModel(
-    "base",
-    device="cpu",
-    compute_type="int8",
-)
+text = transcribe_audio(audio_path)
 
-segments, info = model.transcribe(
-    audio_path,
-    language="pl",
-)
-
-print("Wykryty jezyk:", info.language)
-print("Rozpoznany tekst:")
-
-for segment in segments:
-    print(segment.text.strip())
+print("Rozpoznany tekst:",text)
