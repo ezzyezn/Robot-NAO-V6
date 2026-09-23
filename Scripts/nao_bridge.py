@@ -5,6 +5,8 @@ from pathlib import Path
 
 answers = Queue()
 
+recordings = Queue()
+
 UPLOAD_PATH = Path("work/question.wav")
 
 def get_next_answer():
@@ -44,6 +46,7 @@ class RobotHandler(BaseHTTPRequestHandler):
         audio_data = self.rfile.read(length)
         UPLOAD_PATH.parent.mkdir(exist_ok=True)
         UPLOAD_PATH.write_bytes(audio_data)
+        recordings.put(audio_data)
         
         self.send_response(200)
         self.end_headers()

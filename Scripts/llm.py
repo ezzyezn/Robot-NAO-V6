@@ -19,7 +19,7 @@ def generate_answer(question, info):
             {
                 "role": "system",
                 "content": (
-                    "Jesteś Tebit, przyjazny robot. "
+                    "Jesteś Geraldem, przyjazny robot. "
                     "Mów po polsku, krótko: 1–2 zdania, bez emoji. "
                     "Odpowiadaj na powitania i proste pytania o siebie. "
                     "Fakty o szkole podawaj wyłącznie z danych, "

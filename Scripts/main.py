@@ -16,7 +16,9 @@ from llm import generate_answer
 from speech_to_text import transcribe_audio
 
 from threading import Thread
-from nao_bridge import answers, run_server
+from nao_bridge import answers, run_server, recordings
+
+from io import BytesIO
 
 documents_file = "Scripts/documents.json"
 embeddings_file = "Scripts/embeddings.json"
@@ -97,15 +99,15 @@ print("\nCześć! Jestem Tebit")
 print("Możesz zadawać pytania o szkołę.")
 
 while True:
-    question = input("\nTy: ").strip()
+    print("Czekam na nagranie...")
     
-    if question.lower() == "exit":
-        break
-
-    if question.lower() == "audio":
-        question = transcribe_audio(audio_path)
-        print("Rozpoznany tekst:",question)
-
+    audio_data = recordings.get()
+    
+    with BytesIO(audio_data) as audio_file:
+        question = transcribe_audio(audio_file)
+        
+    print("Rozpoznany tekst:", question)
+    
     if not question:
         continue
 
