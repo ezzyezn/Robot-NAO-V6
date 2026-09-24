@@ -8,7 +8,7 @@ import ollama
 # Generate the final answer for the user
 def generate_answer(question, info):
 
-    # Create a message with the found information and the users question
+    # Create a message with the found information and the user's question
     user_message = (
         f"Dane szkoły:\n{info}\n\n"
         f"Pytanie: {question}"
@@ -38,7 +38,7 @@ def generate_answer(question, info):
         options={
             "temperature": 0,
             "num_predict": 60,
-        }
+        },
     )
     print(
         f"Загрузка модели: "

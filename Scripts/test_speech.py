@@ -4,4 +4,4 @@ audio_path = "work/question.wav"
 
 text = transcribe_audio(audio_path)
 
-print("Rozpoznany tekst:",text)
+print("Rozpoznany tekst:", text)

@@ -34,7 +34,7 @@ urls = [
 
 
 if os.path.exists(documents_file) and update != "y":
-    print("Loading documents fro cache...")
+    print("Loading documents from cache...")
     documents = load_documents(documents_file)
 else:
     print("Downloading documents...")
@@ -66,9 +66,7 @@ for course in courses:
         )
 
 
-print("Kierunki:", len(courses))     
-        
-        
+print("Kierunki:", len(courses))
 print("Documents:", len(documents))
 print("Chunks:", len(chunks))
 
@@ -76,6 +74,7 @@ print("Chunks:", len(chunks))
 embeddings = None
 
 
+# Reuse vectors only when both the model and source chunks still match.
 if os.path.exists(embeddings_file):
     cached_data = load_embeddings(embeddings_file)
 
@@ -93,6 +92,7 @@ if embeddings is None:
     embeddings = create_embeddings(chunks)
     save_embeddings(chunks, embeddings, embeddings_file)
 
+# The HTTP server shares queues with the main processing loop.
 Thread(target=run_server, daemon=True).start()
 
 print("\nCześć! Jestem Tebit")
@@ -100,14 +100,15 @@ print("Możesz zadawać pytania o szkołę.")
 
 while True:
     print("Czekam na nagranie...")
-    
+
+    # Wait for the next upload without polling the saved WAV file.
     audio_data = recordings.get()
-    
+
     with BytesIO(audio_data) as audio_file:
         question = transcribe_audio(audio_file)
-        
+
     print("Rozpoznany tekst:", question)
-    
+
     if not question:
         continue
 
@@ -115,6 +116,7 @@ while True:
 
     question_lower = question.casefold()
 
+    # Prefer an exact course name before using embedding similarity.
     matched_names = [
         course["name"]
         for course in courses
@@ -146,11 +148,11 @@ while True:
             top_k=3,
             source=source,
         )
-    
+
     print(f"Poszukiwanie: {perf_counter() - search_start:.2f} с")
-    
+
     context_parts = []
-    
+
     for chunk, similarity in top_chunks:
         part = (
             f"Source: {chunk['source']}\n"
@@ -158,9 +160,9 @@ while True:
             f"Text: {chunk['text']}"
         )
         context_parts.append(part)
-        
+
     context = "\n\n".join(context_parts)
-    
+
     print("\nTebit myśli...")
     answer_start = perf_counter()
 

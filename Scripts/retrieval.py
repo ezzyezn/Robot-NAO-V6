@@ -46,7 +46,7 @@ def find_top_chunks(question, chunks, embeddings, top_k=3, source=None):
     for chunk, chunk_embedding in zip(chunks, embeddings):
         if source is not None and chunk["source"] != source:
             continue
-        
+
         similarity = cosine_similarity(question_embedding, chunk_embedding)
 
         results.append((chunk, similarity))

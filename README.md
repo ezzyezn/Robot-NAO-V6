@@ -1,337 +1,190 @@
 # Robot-NAO-V6
 
-A local Polish-speaking information assistant for a NAO V6 robot. The assistant answers questions about TEB schools in Gdańsk using a small, local language model and a local school-information database.
+A Polish-speaking school information assistant built with a **NAO V6 robot**, **Choregraphe**, and local AI models running on a Windows laptop. Developed as a school internship and demonstration project for TEB in Gdańsk.
 
-The project is designed for a school internship and exhibition prototype. It is intentionally simple: the laptop does the data processing and AI work, while NAO is used for voice interaction and speech output.
+The robot handles microphones and speech output. The laptop transcribes questions, searches school information, and generates short answers. No paid cloud AI API is required.
 
-## What the project does
+**Status: working voice prototype; reliability improvements are still in progress.** Last documentation review: **24 September 2026**.
 
-The current system can:
+> Need to restore the robot or set it up without the original author? Follow [NAO setup and recovery](docs/NAO_SETUP.md). It includes the box scripts, exact connections, startup order, and checks.
 
-- run the language model locally through Ollama;
-- answer in Polish using a short, friendly style;
-- answer greetings and simple questions about the robot;
-- retrieve school facts from two official TEB pages;
-- retrieve study-direction information from `Scripts/kierunki.json`;
-- use cached documents and embeddings to make later starts faster;
-- send generated answers to NAO over the local network;
-- record audio on NAO and upload the WAV file to the laptop.
+## What works now
 
-The voice recording is connected to the laptop, but speech-to-text is still a separate next step. At the moment, the text chat and audio-file transfer work independently.
+- Activate a question by saying **“nao”**.
+- Record the question on the robot and upload it over the local network, including Wi-Fi.
+- Transcribe Polish speech with **faster-whisper**, using the `small` model on the CPU.
+- Find relevant school information using exact course-name matching or embeddings.
+- Generate a short Polish answer with Ollama and speak it through NAO's `ALTextToSpeech`.
+- Temporarily disable our wake-word subscription during the question/answer cycle and enable it again after speech finishes.
+- Cache documents, embeddings, and downloaded models for later use.
 
-The assistant is not intended to be a general-purpose chatbot. If the required fact is not in the supplied school data, it should say that it does not have the information.
+The full voice loop has worked in manual tests. The latest pause/resume changes are present in the saved behavior, but still need repeat-cycle testing. Recording sometimes reaches its 15-second limit; recovery from empty transcriptions and network errors is not complete. See [Known limitations](#known-limitations).
 
-## System overview
+## How it works
 
 ```mermaid
 flowchart LR
-    U[Student] -->|text question| M[Scripts/main.py]
-    N[NAO V6] -->|recorded WAV| B[HTTP bridge :8765]
-    B --> W[work/question.wav]
-    M --> S[Official school pages]
-    M --> K[Scripts/kierunki.json]
-    M --> R[Retrieval and embeddings]
-    R --> O[Ollama on the laptop]
-    O -->|short Polish answer| M
-    M -->|GET /next| B
-    B -->|JSON answer| N
+    U[User says nao and asks a question] --> N[NAO records WAV]
+    N -->|POST /upload| B[HTTP bridge on laptop :8765]
+    B --> Q[Recording queue]
+    Q --> W[Whisper: speech to text]
+    W --> R[Retrieve school information]
+    D[Cached pages and course JSON] --> R
+    R --> L[Ollama: generate answer]
+    L --> A[Answer queue]
+    A -->|Response to NAO GET /next| T[NAO text to speech]
+    T --> E[Enable wake-word listening again]
 ```
 
-The laptop and NAO must be connected to the same local network. No cloud LLM API is required for the text assistant.
+**STT** means speech-to-text. **TTS** means text-to-speech. **RAG** (retrieval-augmented generation) means finding source information before asking the language model to answer.
 
-## Project structure
-
-| Path | Purpose |
-| --- | --- |
-| `Scripts/main.py` | Main application. Loads data, prepares embeddings, starts the bridge, reads questions, retrieves context, and sends answers to NAO. |
-| `Scripts/llm.py` | Calls the local Ollama chat model and contains the Polish assistant instructions. |
-| `Scripts/retrieval.py` | Creates, saves, loads, and searches text embeddings. |
-| `Scripts/similarity.py` | Calculates cosine similarity between two vectors. |
-| `Scripts/scraper.py` | Downloads and cleans the two official TEB pages and splits them into searchable chunks. |
-| `Scripts/nao_bridge.py` | Local HTTP server. It gives NAO queued answers through `/next` and accepts recorded WAV files through `/upload`. |
-| `Scripts/kierunki.json` | Structured information about available study directions, study mode, required documents, and schedule. |
-| `Scripts/documents.json` | Cached copy of the scraped school pages. It can be regenerated by the scraper and is currently stored in the repository. |
-| `NAO/` | Local Choregraphe project files and NAO behavior files. This folder is ignored by Git in this repository. Copy it separately when transferring the robot setup. |
-| `work/` | Local runtime files such as uploaded recordings. It is ignored by Git. |
-| `.gitignore` | Keeps caches, recordings, virtual environments, and local NAO files out of the repository. |
+Whisper and Ollama run on the laptop, not on NAO. After the models and school data have been downloaded, the normal voice flow can run locally. Internet access is needed for initial installation, model downloads, and refreshing the web sources.
 
 ## Requirements
 
-### Hardware and software
+| Component | Current project setup |
+| --- | --- |
+| Robot | NAO V6 with a working Polish speech configuration |
+| Robot editor | Choregraphe 2.8 and access to connect to the robot |
+| Laptop | Windows, Python **3.12**; development used 3.12.9 |
+| STT | `faster-whisper`, model `small`, `device="cpu"`, `compute_type="int8"`, language `pl` |
+| Local LLM | Ollama: `qwen3:4b-instruct-2507-q4_K_M` |
+| Embeddings | Ollama: `qwen3-embedding:0.6b` |
+| Network | Robot can reach laptop TCP port `8765` |
 
-- Windows laptop connected to the same network as the NAO V6 robot;
-- Python 3.11 or newer;
-- Ollama;
-- Choregraphe 2.8 for the physical NAO behavior;
-- internet access for the first installation and for refreshing the school pages.
+The Choregraphe box scripts run in the robot's **Python 2.7** environment. Laptop scripts use **Python 3.12**. These are separate environments: do not run the robot box scripts in VS Code as standalone Python programs.
 
-After the models and caches are available, the text assistant can use local data without downloading an LLM response from the internet.
+## Install the laptop software
 
-### Ollama models
-
-This project currently uses:
-
-```text
-qwen3:4b-instruct-2507-q4_K_M
-qwen3-embedding:0.6b
-```
-
-The first model generates the answer. The second model converts questions and school-information chunks into vectors for retrieval.
-
-## Installation
-
-Open PowerShell in the project folder:
+Run commands in PowerShell from the repository root, the folder containing `Scripts` and this README. Replace the example path if necessary:
 
 ```powershell
 cd C:\Users\admin1\Desktop\Robot-NAO-V6
+py -3.12 --version
+py -3.12 -m pip install ollama requests beautifulsoup4 faster-whisper
+py -3.12 -m pip check
 ```
 
-### 1. Create a virtual environment
+| Package | Purpose |
+| --- | --- |
+| `ollama` | Communicate with the local model service |
+| `requests` | Download the school pages |
+| `beautifulsoup4` | Extract text from HTML |
+| `faster-whisper` | Transcribe audio; installs dependencies such as CTranslate2 |
 
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-```
+This repository does not yet contain a verified dependency lock file. The installation command installs available package versions; it is not a promise of an identical historical environment. After validating a new installation, save its package versions with `py -3.12 -m pip freeze` for future recovery.
 
-If `python` is not recognised, use the Python Launcher (`py`) or the full path to the Python executable installed on the laptop.
+In VS Code, use **Ctrl+Shift+P → Python: Select Interpreter → Python 3.12**. Use the same interpreter for all laptop scripts and package installation. If `py` is unavailable, use the full path to your Python 3.12 executable with PowerShell's `&` operator.
 
-### 2. Install Python packages
+An optional virtual environment can keep dependencies separate from other projects. It is not required for the commands above. If using one, select it in VS Code and use its `python` for every installation and run command.
 
-```powershell
-python -m pip install --upgrade pip
-python -m pip install ollama requests beautifulsoup4
-```
-
-The packages are used for:
-
-- `ollama` — communication with the local Ollama service;
-- `requests` — downloading the school pages;
-- `beautifulsoup4` — extracting readable text from HTML.
-
-### 3. Install and start Ollama
-
-Install Ollama from its official website, then download both models:
+Install [Ollama](https://ollama.com/) and download the two models:
 
 ```powershell
 ollama pull qwen3:4b-instruct-2507-q4_K_M
 ollama pull qwen3-embedding:0.6b
-```
-
-Ollama normally runs as a local service on:
-
-```text
-http://127.0.0.1:11434
-```
-
-Check that it is available:
-
-```powershell
 ollama list
 ```
 
-## Running the text assistant
+Keep Ollama running. The code defaults to `http://127.0.0.1:11434`; an existing `OLLAMA_HOST` environment variable overrides that default.
 
-Start Ollama first. Then, in the activated project environment, run:
+Download/load the STT model once before the demonstration:
 
 ```powershell
-python Scripts\main.py
+py -3.12 -c "from faster_whisper import WhisperModel; WhisperModel('small', device='cpu', compute_type='int8'); print('STT model ready')"
 ```
 
-The program asks:
+The first load downloads model files. See the [faster-whisper installation documentation](https://github.com/SYSTRAN/faster-whisper) for dependency requirements.
 
-```text
-Update documents? (y/n):
-```
+## Start the assistant
 
-Choose:
-
-- `y` — download the two configured school pages again and rebuild the document cache;
-- `n` — use `Scripts/documents.json` and the existing embedding cache when they are valid.
-
-The program then prints a prompt:
-
-```text
-Ty:
-```
-
-Enter a Polish question. Type `exit` to close the chat.
-
-The first run can be slower because documents and embeddings are created. Later runs use `Scripts/documents.json` and `Scripts/embeddings.json` when the cached content still matches the current data and embedding model.
-
-## School information sources
-
-The scraper currently uses these official pages:
-
-- [TEB Gdańsk contact page](https://szkolasrednia.teb.pl/miasta/d/gdansk/kontakt/)
-- [TEB Gdańsk — our school](https://szkolasrednia.teb.pl/miasta/d/gdansk/nasza-szkola/)
-
-Study directions are read from the local `Scripts/kierunki.json` file. The main program does not search the whole internet for study-direction answers. This makes the answers more predictable and keeps the exhibition version independent from changes on unrelated pages.
-
-Prices are not included yet because they were not available in the current structured data. Do not add a price to the assistant until it is confirmed by the school source.
-
-## How retrieval works
-
-1. `scraper.py` downloads and cleans the configured pages.
-2. `main.py` splits the text into overlapping chunks.
-3. Each chunk receives an embedding from `qwen3-embedding:0.6b`.
-4. The question receives one embedding.
-5. `retrieval.py` compares the question vector with the chunk vectors using cosine similarity.
-6. The best matching chunks are sent to `llm.py` as context.
-7. The chat model generates a short Polish answer using only that context.
-
-For an exact direction name, `main.py` first looks for the name directly in `Scripts/kierunki.json`. This is faster and more reliable than asking the embedding search to distinguish similar direction names.
-
-## NAO and Choregraphe setup
-
-The Choregraphe project is stored locally under `NAO/nao/`. It contains two important Python Script boxes:
-
-### `Get answer`
-
-This box repeatedly requests:
-
-```text
-http://<laptop-ip>:8765/next
-```
-
-The bridge returns JSON such as:
-
-```json
-{"text": "Cześć! Jestem Tebit."}
-```
-
-When the text is not empty, NAO speaks it through `ALTextToSpeech`. The box checks again after a short delay, so the behavior can speak several answers without being started again.
-
-### `Record question`
-
-This box uses NAO's `ALAudioRecorder` service. It records a WAV file temporarily on the robot at:
-
-```text
-/home/nao/question.wav
-```
-
-When recording stops, the box sends the file to:
-
-```text
-http://<laptop-ip>:8765/upload
-```
-
-The laptop saves the received bytes as:
-
-```text
-work\question.wav
-```
-
-This upload does not require the NAO file-transfer password because NAO sends the file to the laptop itself. The password is only needed when browsing or downloading files from the robot through Choregraphe.
-
-### Network addresses
-
-Replace the address in the Choregraphe scripts with the current laptop address. In the development setup, the laptop used `192.168.0.157` and the NAO used `192.168.0.143`. These addresses may change when the network changes.
-
-The laptop server listens on all local interfaces:
-
-```text
-0.0.0.0:8765
-```
-
-The robot must be able to reach the laptop on TCP port `8765`. If Windows Firewall asks for permission, allow Python to communicate on the trusted private network.
-
-### Recommended startup order
-
-1. Connect NAO and the laptop to the same network.
+1. Connect NAO and the laptop to a network where they can reach each other.
 2. Start Ollama.
-3. Start `Scripts/main.py` on the laptop.
-4. Open the Choregraphe project and connect to NAO.
-5. Start the behavior containing `Get answer`.
-6. Start the text chat and test a generated answer.
-7. Test `Record question` separately until speech-to-text is connected.
+3. From the repository root, run:
 
-Do not run `Scripts/nao_bridge.py` separately while `main.py` is running. `main.py` already starts the bridge, and starting a second server would cause a port conflict.
+   ```powershell
+   py -3.12 Scripts\main.py
+   ```
 
-## Current status
+4. At `Update documents? (y/n):`, choose `n` to reuse cached pages or `y` to download them again. Embeddings are reused only when their model and chunks match the current data.
+5. Wait for the bridge startup message and `Czekam na nagranie...` (waiting for a recording). Check that there is no server startup error.
+6. Open the Choregraphe project, connect to NAO, and start the behavior as described in the [robot guide](docs/NAO_SETUP.md).
+7. Say **“nao”**, pause about one second, then ask a Polish question. Finish speaking and wait for the answer.
 
-### Working
+There is **no typed `Ty:` question prompt or `exit` command in the current `main.py`**. Questions come from uploaded recordings. Stop the laptop application with **Ctrl+C** and stop the behavior in Choregraphe.
 
-- local Ollama chat model;
-- Polish greeting and school-question behavior;
-- two-site scraper with a local document cache;
-- structured study-direction database;
-- embedding cache and similarity search;
-- exact study-direction matching;
-- HTTP answer queue for NAO;
-- NAO text-to-speech output;
-- NAO recording upload to `work/question.wav`.
+**Do not start `nao_bridge.py` separately while `main.py` is running.** The main application already starts the server in a background thread. Two processes cannot use the same port, and their queues would not be shared.
 
-### Next development step
-
-Add local speech-to-text on the laptop. The planned flow is:
-
-```text
-NAO recording → work/question.wav → local speech-to-text → main.py question → Ollama → NAO speech
-```
-
-The project should keep this step separate from the working text chat until the audio transcription has been tested.
-
-## Troubleshooting
-
-### `ollama` model not found
-
-Check the model names and install them again:
+To test STT separately after a recording has been received:
 
 ```powershell
-ollama list
-ollama pull qwen3:4b-instruct-2507-q4_K_M
-ollama pull qwen3-embedding:0.6b
+py -3.12 Scripts\test_speech.py
 ```
 
-### Port `8765` is already in use
+This transcribes the existing `work/question.wav`; it does not create a new recording.
 
-Close an older `main.py` process or a separately started `nao_bridge.py`. Only one bridge should run.
+## Files and responsibilities
 
-### NAO says that recording has already started
+| Path | Purpose |
+| --- | --- |
+| `Scripts/main.py` | Load data, start HTTP bridge, consume recordings, run STT/retrieval/LLM, queue answers |
+| `Scripts/speech_to_text.py` | Load Whisper once and transcribe Polish audio |
+| `Scripts/test_speech.py` | Transcribe the last saved WAV for a manual check |
+| `Scripts/nao_bridge.py` | `POST /upload` receives WAV bytes; `GET /next` returns the next answer as JSON |
+| `Scripts/llm.py` | Ollama model call and Polish answer instructions |
+| `Scripts/retrieval.py` | Create/cache embeddings and search relevant chunks |
+| `Scripts/similarity.py` | Cosine similarity calculation |
+| `Scripts/scraper.py` | Download, clean, and split school pages |
+| `Scripts/kierunki.json` | Course names and study variants; 83 courses were reported during development |
+| `Scripts/documents.json` | Cached school documents |
+| `Scripts/embeddings.json` | Generated embedding cache, ignored by Git |
+| `NAO/nao/nao.pml` | Local Choregraphe project entry point; the whole `NAO/` folder is ignored by Git |
+| `work/question.wav` | Last uploaded recording; overwritten on each upload and ignored by Git |
+| `docs/NAO_SETUP.md` | Robot setup, recovery instructions, and dated copies of core box scripts |
 
-Stop the current Choregraphe behavior before starting `Record question` again. The error means `ALAudioRecorder` is still busy with the previous recording.
+## School data and answer generation
 
-### `question.wav` is not created
+The configured sources are the [TEB Gdańsk contact page](https://szkolasrednia.teb.pl/miasta/d/gdansk/kontakt/) and [our school page](https://szkolasrednia.teb.pl/miasta/d/gdansk/nasza-szkola/), plus `Scripts/kierunki.json`.
 
-Check that:
+For an exact course name, the application selects matching course chunks directly. Otherwise it retrieves up to three chunks using embeddings; some course-related words restrict the search to the course database. The LLM receives the question and selected context, with instructions to give short Polish answers and avoid inventing school facts. These instructions do not guarantee factual accuracy.
 
-- `main.py` is running;
-- the laptop IP in the Choregraphe script is correct;
-- NAO and the laptop are on the same network;
-- Windows Firewall allows the local Python server;
-- the Choregraphe log does not show an upload error.
+There is no conversation history in the current LLM call. Follow-up questions such as “and how much does it cost?” may lack enough context. Course prices are currently inserted as “no information”. Refreshing web documents does not update `kierunki.json`.
 
-### Answers are slow on the first run
+## Known limitations
 
-The first run may load an Ollama model or create embeddings. Later runs should use the caches. Keep the embedding cache when the source data and embedding model have not changed.
+- **Recording timeout:** silence detection uses a fixed microphone energy threshold of `600`. After the first qualifying sound, a `1.5 s` quiet interval stops recording; otherwise the hard limit is `15 s`. Room noise and quiet speech can prevent an early stop.
+- **Empty transcription:** `main.py` skips it without sending a reply. Since wake-word listening resumes after speech output, the robot can remain waiting indefinitely.
+- **Network recovery:** `Get answer` exits its polling loop after a URL error. An upload failure also has no signal to resume wake-word listening.
+- **Recording cleanup:** failures around microphone start/stop are not fully handled. The “Already recording” error may recur.
+- **STT quality:** Polish recognition can confuse similar words. A longer recording is not proof of better recognition.
+- **Latency:** recording time, STT, retrieval, model loading, generation, and polling all contribute. The printed LLM answer time is not the complete interaction time.
+- **Wake-word threshold:** `0.40` was chosen from a small manual test, not a broad evaluation. The built-in recognizer can return `nao` for other sounds with low confidence.
+- **Data maintenance:** the contact scraper depends on page layout and text markers; recheck school/section assignments after refreshing sources.
+- **Naming:** terminal messages still use “Tebit”, while the current LLM prompt calls the assistant “Gerald”. The activation word remains `nao`.
+- **Animations:** a separate “six seven” animation was practised, but is not integrated into the voice loop or included in the core recovery setup.
 
-## Updating the project
+These are open tasks, not completed fixes. For a demonstration, keep an operator available to stop and restart the behavior if necessary.
 
-When new school information arrives:
+## Troubleshooting and recovery
 
-1. Update `Scripts/kierunki.json` or the scraper input, depending on the source.
-2. Run `python Scripts\main.py`.
-3. Choose `y` when asked to refresh the website documents.
-4. Test representative Polish questions.
-5. Check that the answer uses the updated source and does not invent missing facts.
-6. Commit only source code, JSON data, documentation, and required project files.
+For robot-specific errors, see the [diagnostic table](docs/NAO_SETUP.md#troubleshooting).
 
-Do not commit:
+- **Missing Python module:** install it using the same Python 3.12 interpreter selected in VS Code.
+- **CTranslate2 DLL error:** this is a library/runtime loading problem; changing the Whisper model size will not repair it. Follow the [CTranslate2 installation requirements](https://opennmt.net/CTranslate2/installation.html), including the Windows Visual C++ runtime requirement.
+- **`computer_type` constructor error:** use the exact argument `compute_type="int8"`.
+- **Port already in use:** close an older application or standalone bridge before restarting.
+- **No audio file:** check the laptop IP, port, private-network firewall permission, and the Choregraphe upload log.
 
-- `work/` recordings;
-- `Scripts/embeddings.json`;
-- Python cache files;
-- local virtual environments;
-- private local NAO/Choregraphe files unless the team decides to distribute them separately.
+## Maintaining this project
 
-## Development notes
+For each change, update the relevant code, the status/limitations here, and the robot guide if box scripts or wires changed. Add a dated entry below with what changed, what was tested, and what remains open.
 
-The repository history contains the progression from a simple Ollama experiment to a retrieval-augmented assistant, then to a structured study-direction database and the NAO HTTP bridge. The README describes the current implementation; old experiments remain visible in Git history for learning and review.
+Keep a separate backup of the **entire `NAO/nao/` folder**, including `.pml`, behavior files, manifest, translations, and referenced media. A Git clone alone will not restore that ignored folder. The recovery guide can rebuild the three core voice boxes without it.
 
-When adding a feature, update three places:
+Do not commit voice recordings, model downloads, virtual environments, or embedding caches. Verify source data before publishing changes to school facts.
 
-1. the relevant source file;
-2. the `Current status` or setup section in this README;
-3. the troubleshooting section if the feature introduces a new failure mode.
+### Update log
 
-This keeps the project understandable to another student or teacher who needs to set it up without the original developer.
+| Date | Update | Validation / remaining work |
+| --- | --- | --- |
+| 2026-09-24 | Documentation updated for the integrated voice loop, Wi-Fi, Whisper `small`, wake word, and pause/resume wiring; added robot recovery guide | Source and wiring review; full voice loop previously demonstrated manually; timeout and failure recovery remain open |
